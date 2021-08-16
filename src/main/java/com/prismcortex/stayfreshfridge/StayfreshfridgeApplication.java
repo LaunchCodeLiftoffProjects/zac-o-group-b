@@ -13,6 +13,8 @@ public class StayfreshfridgeApplication {
 		SpringApplication.run(StayfreshfridgeApplication.class, args);
 	}
 
+	// Create a landing page to show that it exists and is under construction
+
 	@Controller
 	public class HomePage {
 
