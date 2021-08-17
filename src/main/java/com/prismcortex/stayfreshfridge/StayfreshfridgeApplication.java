@@ -19,9 +19,9 @@ public class StayfreshfridgeApplication {
 	public class HomePage {
 
 		@RequestMapping("")
-		public String underConstuction (Model model) {
+		public String index (Model model) {
 			model.addAttribute("title", "Stay Fresh Fridge Coming Soon...");
-			return "comingsoon";
+			return "index";
 		}
 	}
 
