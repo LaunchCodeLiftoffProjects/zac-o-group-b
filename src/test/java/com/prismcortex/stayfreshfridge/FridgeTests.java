@@ -15,7 +15,7 @@ public class FridgeTests {
     FoodItem testFoodItem1 = new FoodItem();
 
     Fridge testFridge = new Fridge();
-    // Write before each that creates two food items and puts them in a hashmap
+    // Write before each that creates two food items and puts them in an ArrayList
     @BeforeEach
     public void createFoodAndList() {
         testFoodItem.setName("pork");
@@ -32,4 +32,6 @@ public class FridgeTests {
 
     assertEquals(2, testFridge.getFridgeList().size());
     }
+
+
 }
