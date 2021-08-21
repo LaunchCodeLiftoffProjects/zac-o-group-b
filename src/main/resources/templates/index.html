@@ -3,9 +3,11 @@
 <head th:replace="fragments :: head"></head>
 <body>
 
-<h1>Stay Fresh Fridge Coming Soon...</h1>
+<h1 class="display-3 text-center">Stay Fresh Fridge</h1>
+<header th:replace="fragments :: header"></header>
+<div th:replace="fragments :: alert"></div>
 <div class="container-fluid">
-<img th:src="@{/images/fancylandingpage.png}" alt="silver fridge" width="auto" height="auto">
+<img th:src="@{/images/fancylandingpage.png}" class="rounded mx-auto d-block" alt="silver fridge" width="500" height="700">
 
 </div>
 </body>
