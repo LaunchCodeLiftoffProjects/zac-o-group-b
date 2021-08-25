@@ -4,19 +4,21 @@ import java.util.ArrayList;
 
 public class ShoppingList {
 
-    private ArrayList<FoodItem> shoppingList = new ArrayList<>();
+    private ArrayList<GroceryItem> shoppingList = new ArrayList<>();
 
-    public FoodItem createFood(String name, String expires) {
-        FoodItem food = new FoodItem();
+    public GroceryItem createItem(String name, String expires) {
+        GroceryItem food = new GroceryItem();
         food.setName(name); food.setExpires(expires);
         return food;
     }
 
-    public ArrayList<FoodItem> getShoppingList() {
+    public ArrayList<GroceryItem> getShoppingList() {
         return shoppingList;
     }
 
-    public void addFoodToShopping(FoodItem food) {
+    public void addItem(GroceryItem food) {
         shoppingList.add(food);
     }
+
+    public void deleteItem(GroceryItem food) {shoppingList.remove(food);}
 }

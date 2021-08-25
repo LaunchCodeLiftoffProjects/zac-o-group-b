@@ -2,7 +2,7 @@ package com.prismcortex.stayfreshfridge.models;
 
 import java.util.Objects;
 
-public class FoodItem {
+public class GroceryItem {
     // create FoodItem with id, name, and expiration date. Possibly nutrition facts as well in future.
 
     private int id;
@@ -14,12 +14,12 @@ public class FoodItem {
     private String expires;
 
     // constructor to assign a unique ID number to each food item
-    public FoodItem() {
+    public GroceryItem() {
         id = nextId;
         nextId++;
     }
 
-    public FoodItem(String name, String expires) {
+    public GroceryItem(String name, String expires) {
         this(); this.name=name; this.expires=expires;
     }
 
@@ -50,8 +50,8 @@ public class FoodItem {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        FoodItem foodItem = (FoodItem) o;
-        return id == foodItem.id;
+        GroceryItem groceryItem = (GroceryItem) o;
+        return id == groceryItem.id;
     }
 
     @Override
