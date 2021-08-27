@@ -11,7 +11,7 @@ public class GroceryItem {
 
     private String name;
 
-    private String expires;
+    private String expires = "";
 
     // constructor to assign a unique ID number to each food item
     public GroceryItem() {
