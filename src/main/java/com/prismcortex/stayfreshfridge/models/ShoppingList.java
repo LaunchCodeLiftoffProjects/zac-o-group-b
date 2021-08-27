@@ -1,24 +1,29 @@
 package com.prismcortex.stayfreshfridge.models;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ShoppingList {
 
-    private ArrayList<GroceryItem> shoppingList = new ArrayList<>();
+    private static Map<Integer, GroceryItem> shoppingList = new HashMap<>();
 
-    public GroceryItem createItem(String name, String expires) {
-        GroceryItem food = new GroceryItem();
-        food.setName(name); food.setExpires(expires);
-        return food;
+    public static Collection<GroceryItem> getShoppingList() {
+        return shoppingList.values();
     }
 
-    public ArrayList<GroceryItem> getShoppingList() {
-        return shoppingList;
+    public static GroceryItem getById(Integer id) {
+        return shoppingList.get(id);
     }
 
-    public void addItem(GroceryItem food) {
-        shoppingList.add(food);
+    public static void add(GroceryItem item) {
+        shoppingList.put(item.getId(), item);
     }
 
-    public void deleteItem(GroceryItem food) {shoppingList.remove(food);}
+    public static void remove(Integer id) {
+        if (shoppingList.containsKey(id)) {
+            shoppingList.remove(id);
+        }
+    }
 }
