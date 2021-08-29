@@ -14,7 +14,7 @@ public class GroceryItemTests {
     @BeforeEach
     public void createTestFoodItem() {
         testGroceryItem.setName("milk");
-        testGroceryItem.setExpires("8/13/21");
+        testGroceryItem.setExpires(10);
     }
 
 

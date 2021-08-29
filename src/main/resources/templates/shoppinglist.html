@@ -4,35 +4,34 @@
 <body>
     <header th:replace="fragments :: header"></header>
 
-<h1 class="display-3">Shopping List</h1>
+<h1 class="display-3 text-center" >Shopping List</h1>
 
-<div class="container-fluid">
+    <form action="shoppinglist" method="post">
+<div class="container-fluid" th:if="${shoppingList.size()}">
     <ul class="list-group">
         <th:block th:each="item : ${shoppingList}">
-        <li class="list-group-item" th:text="${item.name}"></li>
-        </th:block>
-    </ul>
-</div>
+        <li class="list-group-item" th:text="${item}">
 
-    <form action="shoppinglist" method="post" id="addItem">
+        </th:block>
+        </ul>
+
+</div>
+    <div>
+    <h3 class="text-center" th:unless="${shoppingList.size()}">Add Items to Your List</h3>
 
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Item Name" name="itemName">
+            <input type="text" class="form-control" placeholder="Item Name" name="name">
 
-            <input type="text" class="form-control" placeholder="Expires: MM/DD/YY" name="expires">
+            <input type="text" class="form-control" placeholder="Expires: MM/DD/YY (optional)" name="expires">
 
         </div>
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button class="btn btn-dark" type="button" onclick="addItem()">Add Item</button>
+                <button class="btn btn-dark" type="submit">Add Item</button><br>
             </div>
+    </div>
     </form>
-
-
-<script>
-    function addItem() {
-    document.getElementById("addItem").submit();
-    }
-</script>
-
+        <div class="d-grid gap-2 col-6 mx-auto" th:if="${shoppingList.size()}">
+            <a href="delete" class="btn btn-danger">Delete Items</a>
+        </div>
 </body>
 </html>
