@@ -2,43 +2,48 @@ package com.prismcortex.stayfreshfridge;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+
+import com.prismcortex.stayfreshfridge.data.ShoppingListData;
 import com.prismcortex.stayfreshfridge.models.GroceryItem;
-import com.prismcortex.stayfreshfridge.models.ShoppingList;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @SpringBootTest
 public class ShoppingListTests {
 
     // ShoppingList class should create and store FoodItems
-
-
-    ShoppingList testShoppingList = new ShoppingList();
-    GroceryItem testFood = testShoppingList.createItem("pork", "08/22/21");
-    GroceryItem testFood1 = testShoppingList.createItem("beans", "08/22/21");
-    @BeforeEach
-    public void createList() {
-        testShoppingList.addItem(testFood);
-        testShoppingList.addItem(testFood1);
-    }
-
-
+    GroceryItem testItem = new GroceryItem("pork", 10);
+    GroceryItem testItem1 = new GroceryItem("beans", 0);
 
 
     @Test
-    public void testForCreateItemMethod() {
-        assertTrue(testShoppingList.getShoppingList().contains(testFood));
+    public void testForAddItem() {
+        ShoppingListData.getShoppingList();
+
+        ShoppingListData.add(testItem);
+        assertTrue(ShoppingListData.getShoppingList().contains(testItem));
     }
 
     @Test
     public void testForMultipleItemsInList() {
-        assertEquals(2, testShoppingList.getShoppingList().size());
+
+        ShoppingListData.add(testItem);
+        ShoppingListData.add(testItem1);
+        assertEquals(2, ShoppingListData.getShoppingList().size());
     }
 
     @Test
     public void testToDeleteItem() {
-        testShoppingList.deleteItem(testFood);
-        assertEquals(1, testShoppingList.getShoppingList().size());
+        ShoppingListData.getShoppingList().removeAll(ShoppingListData.getShoppingList());
+        ShoppingListData.add(testItem);
+        ShoppingListData.add(testItem1);
+        ShoppingListData.remove(testItem.getId());
+        assertEquals(1, ShoppingListData.getShoppingList().size());
     }
 }

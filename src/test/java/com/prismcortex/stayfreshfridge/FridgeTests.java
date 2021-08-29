@@ -18,9 +18,9 @@ public class FridgeTests {
     @BeforeEach
     public void createFoodAndList() {
         testGroceryItem.setName("pork");
-        testGroceryItem.setExpires("8/22/21");
+        testGroceryItem.setExpires(10);
         testGroceryItem1.setName("beans");
-        testGroceryItem1.setExpires("8/22/21");
+        testGroceryItem1.setExpires(0);
         testFridge.addFoodItem(testGroceryItem);
         testFridge.addFoodItem(testGroceryItem1);
 
