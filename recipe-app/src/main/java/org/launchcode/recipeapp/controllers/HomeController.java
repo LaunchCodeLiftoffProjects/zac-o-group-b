@@ -10,4 +10,9 @@ public class HomeController {
         model.addAttribute("title", "Recipe Application");
         return "index";
     }
+    @RequestMapping("home")
+    public String home (Model model){
+        model.addAttribute("title", "Recipe Application");
+        return "index";
+    }
 }
