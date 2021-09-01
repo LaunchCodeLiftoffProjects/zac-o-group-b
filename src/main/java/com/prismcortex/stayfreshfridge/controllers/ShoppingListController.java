@@ -7,31 +7,31 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+@RequestMapping("shoppinglist")
 @Controller
 public class ShoppingListController {
 
-
-    @RequestMapping("shoppinglist")
     @GetMapping
     public String displayShoppingList(Model model) {
         model.addAttribute("title", "Shopping List");
         model.addAttribute("shoppingList", ShoppingListData.getShoppingList());
-        return "shoppinglist";
+        return "savegreen/shoppinglist/shoppinglist";
     }
-    @PostMapping("shoppinglist")
+    @PostMapping
     public String createGroceryItem(@RequestParam String name, @RequestParam (required = false) Integer expires,
-                                    @RequestParam (required = false) GroceryItem groceryItem, Model model) {
+                                    Model model) {
         model.addAttribute("title", "Shopping List");
+        model.addAttribute("shoppingList", ShoppingListData.getShoppingList());
         ShoppingListData.add(new GroceryItem(name, expires));
 
-        return "redirect:shoppinglist";
+        return "savegreen/shoppinglist/shoppinglist";
     }
-
+    @RequestMapping("delete")
     @GetMapping("delete")
     public String displayDeleteList(Model model) {
         model.addAttribute("title", "Shopping List");
         model.addAttribute("shoppingList", ShoppingListData.getShoppingList());
-        return "delete";
+        return "savegreen/shoppinglist/delete";
     }
 
     @PostMapping("delete")
@@ -42,7 +42,7 @@ public class ShoppingListController {
             }
         }
 
-        return "redirect:shoppinglist";
+        return "redirect:delete";
     }
 
 }

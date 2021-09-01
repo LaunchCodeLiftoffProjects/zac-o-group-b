@@ -9,7 +9,7 @@ public class GroceryItem {
 
     private String name;
 
-    private Integer expires = 0;
+    private Integer expires;
 
 
     public GroceryItem() {
@@ -42,7 +42,7 @@ public class GroceryItem {
     }
 
     @Override
-    public String toString() {return name + " " + "Expires: " + expires + " days";}
+    public String toString() {return name;}
 
     @Override
     public boolean equals(Object o) {
