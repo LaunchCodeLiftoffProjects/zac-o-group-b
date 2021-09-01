@@ -17,9 +17,16 @@
             </th:block>
         </ul>
         <div class="d-grid gap-2 col-6 mx-auto">
-            <button class="btn btn-dark" type="submit">Delete Checked</button>
+            <button class="btn btn-danger" type="submit">Delete Checked</button>
+        </div><br>
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <a href="/shoppinglist" class="btn btn-info">Back To List</a>
         </div>
+
     </div>
 </form>
+<div class="d-grid gap-2 col-6 mx-auto" th:unless="${shoppingList.size()}">
+    <a href="/shoppinglist" class="btn btn-info">Back To List</a>
+</div>
 </body>
 </html>
