@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+<h1 class="display-3 text-center">Stay Fresh Fridge</h1>
+<header th:replace="fragments :: header(page='recipe')"></header>
+<div th:replace="fragments :: alert"></div>
+<div class="container-fluid">
+
+    <form method="post" style="max-width:600px;">
+        <div>
+            <h5 class="text-primary">Add New Recipe</h5>
+        </div>
+        <div class="form-group">
+            <label th:for="name" class="text-dark">Recipe Name</label>
+            <input class="form-control" th:field="${recipe.recipe_name}" />
+            <span th:errors="${recipe.recipe_name}" class="error text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label th:for="location" class="text-dark">Recipe Description</label>
+            <input class="form-control" th:field="${recipe.recipe_description}" />
+            <span th:errors="${recipe.recipe_description}" class="error text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label th:for="location" class="text-dark">Recipe Details</label>
+            <textarea class="form-control" th:field="${recipe.recipe_details}"></textarea>
+            <span th:errors="${recipe.recipe_details}" class="error text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label th:for="location" class="text-dark">Recipe Image URL</label>
+            <input class="form-control" th:field="${recipe.recipe_img_url}" />
+            <span th:errors="${recipe.recipe_img_url}" class="error text-danger"></span>
+        </div>
+        <br>
+        <input type="submit" value="Save" class="btn btn-primary btn-lg active" />
+    </form>
+
+
+</div>
+</body>
+</html>
