@@ -20,11 +20,9 @@ public class ShoppingListController {
     @PostMapping
     public String createGroceryItem(@RequestParam String name, @RequestParam (required = false) Integer expires,
                                     Model model) {
-        model.addAttribute("title", "Shopping List");
-        model.addAttribute("shoppingList", ShoppingListData.getShoppingList());
         ShoppingListData.add(new GroceryItem(name, expires));
 
-        return "savegreen/shoppinglist/shoppinglist";
+        return "redirect:shoppinglist";
     }
     @RequestMapping("delete")
     @GetMapping("delete")
