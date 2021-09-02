@@ -35,3 +35,9 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### shelflife API ###
+.idea/
+
+target/
+
