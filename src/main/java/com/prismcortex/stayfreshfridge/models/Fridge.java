@@ -1,22 +1,21 @@
 package com.prismcortex.stayfreshfridge.models;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Fridge {
 
-    private ArrayList<FoodItem> fridgeList = new ArrayList<>();
+    private ArrayList<GroceryItem> fridgeList = new ArrayList<>();
 
 
-    public ArrayList<FoodItem> getFridgeList() {
+    public ArrayList<GroceryItem> getFridgeList() {
         return fridgeList;
     }
 
-    public void addFoodItem(FoodItem food) {
+    public void addFoodItem(GroceryItem food) {
         fridgeList.add(food);
     }
 
-    public void deleteFoodItem(FoodItem food) {
+    public void deleteFoodItem(GroceryItem food) {
         fridgeList.remove(food);
     }
 
