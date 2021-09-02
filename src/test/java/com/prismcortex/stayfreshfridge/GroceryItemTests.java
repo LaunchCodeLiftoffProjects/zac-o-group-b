@@ -1,6 +1,6 @@
 package com.prismcortex.stayfreshfridge;
 
-import com.prismcortex.stayfreshfridge.models.FoodItem;
+import com.prismcortex.stayfreshfridge.models.GroceryItem;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,23 +8,23 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class FoodItemTests {
-    FoodItem testFoodItem = new FoodItem();
+public class GroceryItemTests {
+    GroceryItem testGroceryItem = new GroceryItem();
 
     @BeforeEach
     public void createTestFoodItem() {
-        testFoodItem.setName("milk");
-        testFoodItem.setExpires("8/13/21");
+        testGroceryItem.setName("milk");
+        testGroceryItem.setExpires(10);
     }
 
 
     @Test
     public void testForFoodItemObjectName() {
-        assertEquals("milk", testFoodItem.getName());
+        assertEquals("milk", testGroceryItem.getName());
     }
 
     @Test
     public void testForFoodItemObjectExpires() {
-        assertEquals("8/13/21", testFoodItem.getExpires());
+        assertEquals("8/13/21", testGroceryItem.getExpires());
     }
 }

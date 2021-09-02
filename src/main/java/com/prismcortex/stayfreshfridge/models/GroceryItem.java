@@ -2,30 +2,24 @@ package com.prismcortex.stayfreshfridge.models;
 
 import java.util.Objects;
 
-public class FoodItem {
-    // create FoodItem with id, name, and expiration date. Possibly nutrition facts as well in future.
-
+public class GroceryItem {
+    // create FoodItem with name, and expiration date. Possibly nutrition facts as well in future.
     private int id;
-
     private static int nextId = 1;
 
     private String name;
 
-    private String expires;
+    private Integer expires;
 
-    // constructor to assign a unique ID number to each food item
-    public FoodItem() {
-        id = nextId;
-        nextId++;
+
+    public GroceryItem() {
+
     }
 
-    public FoodItem(String name, String expires) {
-        this(); this.name=name; this.expires=expires;
+    public GroceryItem(String name, Integer expires) {
+        this(); this.name=name; this.expires=expires; this.id=nextId; nextId++;
     }
 
-    public int getId() {
-        return id;
-    }
 
     public String getName() {
         return name;
@@ -35,12 +29,16 @@ public class FoodItem {
         this.name = name;
     }
 
-    public String getExpires() {
+    public Integer getExpires() {
         return expires;
     }
 
-    public void setExpires(String expires) {
+    public void setExpires(Integer expires) {
         this.expires = expires;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override
@@ -50,8 +48,8 @@ public class FoodItem {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        FoodItem foodItem = (FoodItem) o;
-        return id == foodItem.id;
+        GroceryItem that = (GroceryItem) o;
+        return id == that.id;
     }
 
     @Override
