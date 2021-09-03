@@ -21,8 +21,8 @@ public class FridgeTests {
         testGroceryItem.setExpires(10);
         testGroceryItem1.setName("beans");
         testGroceryItem1.setExpires(0);
-        testFridge.addFoodItem(testGroceryItem);
-        testFridge.addFoodItem(testGroceryItem1);
+        testFridge.add(testGroceryItem);
+        testFridge.add(testGroceryItem1);
 
     }
 

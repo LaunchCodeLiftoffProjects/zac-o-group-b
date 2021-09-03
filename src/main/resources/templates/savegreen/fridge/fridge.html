@@ -6,5 +6,14 @@
 
 <h1 class="display-3">Fridge</h1>
 
+<div class="container-fluid">
+    <ul class="list-group">
+        <th:block th:each="item : ${shoppingList}">
+            <li class="list-group-item" th:text="${item}">
+
+        </th:block>
+    </ul>
+
+</div>
 </body>
 </html>
