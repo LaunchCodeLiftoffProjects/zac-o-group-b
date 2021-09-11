@@ -8,8 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
-
 @RequestMapping("shoppinglist")
 @Controller
 public class ShoppingListController {
@@ -21,7 +19,7 @@ public class ShoppingListController {
         return "savegreen/shoppinglist/shoppinglist";
     }
     @PostMapping
-    public String createGroceryItem(@RequestParam String name, @RequestParam (required = false) Integer expires,
+    public String createGroceryItem(@RequestParam String name, @RequestParam (required = false) String expires,
                                     Model model) {
         ShoppingListData.add(new GroceryItem(name, expires));
 
