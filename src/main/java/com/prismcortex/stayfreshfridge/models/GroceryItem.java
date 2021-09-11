@@ -9,14 +9,14 @@ public class GroceryItem {
 
     private String name;
 
-    private Integer expires;
+    private String expires;
 
 
     public GroceryItem() {
 
     }
 
-    public GroceryItem(String name, Integer expires) {
+    public GroceryItem(String name, String expires) {
         this(); this.name=name; this.expires=expires; this.id=nextId; nextId++;
     }
 
@@ -29,11 +29,11 @@ public class GroceryItem {
         this.name = name;
     }
 
-    public Integer getExpires() {
+    public String getExpires() {
         return expires;
     }
 
-    public void setExpires(Integer expires) {
+    public void setExpires(String expires) {
         this.expires = expires;
     }
 

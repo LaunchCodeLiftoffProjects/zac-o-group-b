@@ -1,43 +1,42 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body>
+<body onload="displayList()">
     <header th:replace="fragments :: header"></header>
 
 <h1 class="display-6 text-center" >Shopping List</h1>
 
 
-<div class="container-fluid">
-    <ul class="list-group">
-        <th:block th:each="item : ${shoppingList}">
-        <li class="list-group-item" th:text="${item}">
-
-        </th:block>
-        </ul>
+<div class="list-group list-group-flush fs-3 fw-bold" id="shoppinglist">
 
 </div>
-        <h3 class="text-center">Add Items to Your List</h3>
+
     <div>
 
-        <form action="shoppinglist" method="post">
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Item Name" name="name">
-
-            <input type="text" class="form-control" placeholder="Days til Expires: # (optional)" name="expires">
+        <form action="shoppinglist" method="post" class="row">
+        <div class="col-md-6">
+            <input id="itemName" type="text" class="form-control" placeholder="Item Name" name="name" value="">
 
         </div>
-            <div class="d-grid gap-2 col-6 mx-auto">
-                <button class="btn btn-dark" type="submit">Add Item</button><br>
-            </div>
-        </form>
+        <div class="col-md-6">
+            <input id="expires" type="date" class="form-control" placeholder="Expires:(optional)" name="expires" value="">
+
+        </div>
+
+
+        </form><br>
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button id="addItem" class="btn btn-dark" onclick="createGroceryItem()">Add Item</button><br>
+        </div>
     </div>
 
         <div class="d-grid gap-2 col-6 mx-auto">
-            <a href="shoppinglist/delete" class="btn btn-danger">Delete Items</a>
+            <button id="deleteAll" class="btn btn-danger" onclick="deleteAll()">Delete All</button>
         </div><br>
 
-    <div class="d-grid gap-2 col-6 mx-auto">
-        <a href="shoppinglist/move" class="btn btn-info">Move To Fridge</a>
-    </div>
+<!--    <div class="d-grid gap-2 col-6 mx-auto">-->
+<!--        <a href="shoppinglist/move" class="btn btn-info">Move To Fridge</a>-->
+<!--    </div>-->
+    <script src="/js/script.js"></script>
 </body>
 </html>
