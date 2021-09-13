@@ -19,7 +19,7 @@ public class ShoppingListController {
         return "savegreen/shoppinglist/shoppinglist";
     }
     @PostMapping
-    public String createGroceryItem(@RequestParam String name, @RequestParam (required = false) String expires,
+    public String createGroceryItem(@RequestParam String name, @RequestParam String expires,
                                     Model model) {
         ShoppingListData.add(new GroceryItem(name, expires));
 

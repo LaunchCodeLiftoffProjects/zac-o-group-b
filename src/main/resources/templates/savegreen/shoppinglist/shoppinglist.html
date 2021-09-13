@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body onload="displayList()">
+
+<body onload="displayShoppingList()">
     <header th:replace="fragments :: header"></header>
 
 <h1 class="display-6 text-center" >Shopping List</h1>
@@ -19,24 +20,29 @@
 
         </div>
         <div class="col-md-6">
-            <input id="expires" type="date" class="form-control" placeholder="Expires:(optional)" name="expires" value="">
+            <input id="expires" type="date" class="form-control" placeholder="Expires: " name="expires" value="">
 
-        </div>
+        </div><br>
 
 
         </form><br>
         <div class="d-grid gap-2 col-6 mx-auto">
             <button id="addItem" class="btn btn-dark" onclick="createGroceryItem()">Add Item</button><br>
         </div>
+
     </div>
 
         <div class="d-grid gap-2 col-6 mx-auto">
-            <button id="deleteAll" class="btn btn-danger" onclick="deleteAll()">Delete All</button>
+            <button id="deleteSelected" class="btn btn-danger" onclick="deleteSelectedShoppingList()">Delete Checked Items</button>
         </div><br>
 
-<!--    <div class="d-grid gap-2 col-6 mx-auto">-->
-<!--        <a href="shoppinglist/move" class="btn btn-info">Move To Fridge</a>-->
-<!--    </div>-->
-    <script src="/js/script.js"></script>
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <button class="btn btn-info" onclick="moveSelected()">Move Checked To Fridge</button>
+    </div><br>
+
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <button id="deleteAll" class="btn btn-danger" onclick="deleteAllShoppingList()">Clear List</button>
+    </div><br>
+
 </body>
 </html>
