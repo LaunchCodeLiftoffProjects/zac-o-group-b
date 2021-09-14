@@ -13,27 +13,39 @@
         </div>
         <div class="form-group">
             <label th:for="name" class="text-dark">Recipe Name</label>
-            <input class="form-control" th:field="${recipe.recipe_name}" />
+            <input class="form-control" th:field="${recipe.recipe_name}" placeholder="Recipe Name" />
             <span th:errors="${recipe.recipe_name}" class="error text-danger"></span>
         </div>
 
         <div class="form-group">
-            <label th:for="location" class="text-dark">Recipe Description</label>
-            <input class="form-control" th:field="${recipe.recipe_description}" />
+            <label th:for="description" class="text-dark">Recipe Description</label>
+            <input class="form-control" th:field="${recipe.recipe_description}" placeholder="Recipe Description" />
             <span th:errors="${recipe.recipe_description}" class="error text-danger"></span>
         </div>
 
         <div class="form-group">
-            <label th:for="location" class="text-dark">Recipe Details</label>
-            <textarea class="form-control" th:field="${recipe.recipe_details}"></textarea>
+            <label th:for="details" class="text-dark">Recipe Details</label>
+            <textarea class="form-control" th:field="${recipe.recipe_details}" placeholder="Recipe Detailed info"></textarea>
             <span th:errors="${recipe.recipe_details}" class="error text-danger"></span>
         </div>
 
         <div class="form-group">
-            <label th:for="location" class="text-dark">Recipe Image URL</label>
-            <input class="form-control" th:field="${recipe.recipe_img_url}" />
+            <label th:for="image" class="text-dark">Recipe Image URL</label>
+            <input class="form-control" th:field="${recipe.recipe_img_url}" placeholder="Recipe Image URL"/>
             <span th:errors="${recipe.recipe_img_url}" class="error text-danger"></span>
         </div>
+
+        <div class="form-group">
+            <label th:for="recipeIngredient.ingredient" class="text-dark">Ingredient</label>
+            <select class="form-control" th:field="${recipeIngredient.ingredient_id_r}" >
+                <th:block th:each="ingredient : ${ingredients}">
+                    <option th:value=${ingredient.ingredient_id} th:text="${ingredient.ingredient_name}"></option>
+                </th:block>
+            </select>
+            <a href="/ingredients/add" class="btn btn-primary btn-lg active" role="button">Add New Ingredients</a>
+        </div>
+
+
         <br>
         <input type="submit" value="Save" class="btn btn-primary btn-lg active" />
     </form>

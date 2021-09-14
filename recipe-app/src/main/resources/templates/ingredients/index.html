@@ -7,25 +7,15 @@
 <div th:replace="fragments :: alert"></div>
 <div class="container-fluid">
     <br>
-    <p th:text="${title}"></p>
-
     <div>
         <a href="/recipe/add" class="btn btn-primary btn-lg active" role="button">Add New Recipe</a>
         <a href="/ingredients/add" class="btn btn-primary btn-lg active" role="button">Add New Ingredients</a>
-        Search by Ingredient: <select name="ingredientID" th:onchange="'window.location.href = \'' + @{/recipe/} + '\' + this.value ' ">
-            <th:block th:each="ingredient : ${ingredients}">
-                <option th:value=${ingredient.ingredient_id} th:text="${ingredient.ingredient_name}"></option>
-            </th:block>
-        </select>
     </div>
     <br>
     <div class="row">
-        <th:block th:each="recipe : ${recipes}">
+        <th:block th:each="ingredient : ${ingredients}">
             <div  class="col-md-4">
-                <a class="text-decoration-none" th:href="@{'/recipe/view/' + ${recipe.recipe_id}}">
-                    <h5  th:text="${recipe.recipe_name}"></h5>
-                    <img th:src="${recipe.recipe_img_url}">
-                </a>
+                <h5  th:text="${ingredient.ingredient_id}"></h5> - <h5  th:text="${ingredient.ingredient_name}"></h5>
                 <p>&nbsp;</p>
             </div>
         </th:block>
