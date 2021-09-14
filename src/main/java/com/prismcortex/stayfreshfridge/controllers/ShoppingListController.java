@@ -16,7 +16,7 @@ public class ShoppingListController {
     public String displayShoppingList(Model model) {
         model.addAttribute("title", "Shopping List");
         model.addAttribute("shoppingList", ShoppingListData.getShoppingList());
-        return "savegreen/shoppinglist/shoppinglist";
+        return "shoppinglist/shoppinglist";
     }
     @PostMapping
     public String createGroceryItem(@RequestParam String name, @RequestParam String expires,
