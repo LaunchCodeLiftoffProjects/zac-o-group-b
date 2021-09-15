@@ -6,12 +6,6 @@
     <content url="file://$MODULE_DIR$/../../src/test">
       <sourceFolder url="file://$MODULE_DIR$/../../src/test/java" isTestSource="true" />
     </content>
-<<<<<<< HEAD
-    <content url="file://$MODULE_DIR$/../../src/test">
-      <sourceFolder url="file://$MODULE_DIR$/../../src/test/java" isTestSource="true" />
-    </content>
-=======
->>>>>>> ec9f12f (Revert "combined contents of recipe-app and stay-fresh-fridge into the same src and it runs.")
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="stayfreshfridge.main" />
