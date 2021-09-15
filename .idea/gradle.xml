@@ -12,6 +12,19 @@
           </set>
         </option>
       </GradleProjectSettings>
+<<<<<<< HEAD
+=======
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/recipe-app" />
+        <option name="gradleJvm" value="16" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/recipe-app" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+>>>>>>> Nates_Branch
     </option>
   </component>
 </project>

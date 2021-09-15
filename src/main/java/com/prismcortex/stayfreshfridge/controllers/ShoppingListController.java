@@ -16,7 +16,11 @@ public class ShoppingListController {
     public String displayShoppingList(Model model) {
         model.addAttribute("title", "Shopping List");
         model.addAttribute("shoppingList", ShoppingListData.getShoppingList());
+<<<<<<< HEAD
         return "shoppinglist/shoppinglist";
+=======
+        return "savegreen/shoppinglist/shoppinglist";
+>>>>>>> Nates_Branch
     }
     @PostMapping
     public String createGroceryItem(@RequestParam String name, @RequestParam String expires,
