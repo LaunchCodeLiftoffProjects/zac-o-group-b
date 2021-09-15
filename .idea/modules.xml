@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.prismcortex.stayfreshfridge.test.iml" filepath="$PROJECT_DIR$/.idea/modules/com.prismcortex.stayfreshfridge.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/stayfreshfridge.iml" filepath="$PROJECT_DIR$/.idea/modules/stayfreshfridge.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/stayfreshfridge.main.iml" filepath="$PROJECT_DIR$/.idea/modules/stayfreshfridge.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/stayfreshfridge.test.iml" filepath="$PROJECT_DIR$/.idea/modules/stayfreshfridge.test.iml" />
