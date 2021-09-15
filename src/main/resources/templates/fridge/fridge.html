@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body onload="displayFridge()">
+<header th:replace="fragments :: header"></header>
+
+<h1 class="display-6 text-center">Fridge</h1>
+
+<div class="list-group list-group-flush fs-3 fw-bold" id="fridge">
+
+</div>
+
+<div>
+
+    <form action="shoppinglist" method="post" class="row">
+        <div class="col-md-6">
+            <input id="itemName" type="text" class="form-control" placeholder="Item Name" name="name" value="">
+
+        </div>
+        <div class="col-md-6">
+            <input id="expires" type="date" class="form-control" placeholder="Expires: " name="expires" value="">
+
+        </div><br>
+
+
+    </form>
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <button id="addItem" class="btn btn-info" onclick="createFridgeItem()">Add Item</button><br>
+    </div>
+
+</div>
+
+<div class="d-grid gap-2 col-6 mx-auto">
+    <button id="deleteSelected" class="btn btn-danger" onclick="deleteSelectedFridge()">Delete Checked Items</button>
+</div><br>
+
+<!--<div class="d-grid gap-2 col-6 mx-auto">-->
+<!--    <button class="btn btn-info" onclick="moveSelected()">Move Checked To Fridge</button>-->
+<!--</div>-->
+
+<div class="d-grid gap-2 col-6 mx-auto">
+    <button id="deleteAll" class="btn btn-danger" onclick="deleteAllFridge()">Clear Fridge</button>
+</div><br>
+</body>
+</html>

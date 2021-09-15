@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+<header th:replace="fragments :: header"></header>
+
+<h1 class="display-3 text-center" >Shopping List</h1>
+<h3 class="text-center">Delete Items</h3>
+
+<form method="post" action="delete">
+    <div class="container-fluid" th:if="${shoppingList.size()}">
+        <ul class="list-group">
+            <th:block th:each="item : ${shoppingList}">
+                <li class="list-group-item">
+                    <input class="form-check-input me-1" type="checkbox" name="itemIds" th:value="${item.id}" aria-label="..." th:text="${item}">
+                </li>
+            </th:block>
+        </ul>
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button class="btn btn-danger" type="submit">Delete Checked</button>
+        </div><br>
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <a href="/shoppinglist" class="btn btn-info">Back To List</a>
+        </div>
+
+    </div>
+</form>
+<div class="d-grid gap-2 col-6 mx-auto" th:unless="${shoppingList.size()}">
+    <a href="/shoppinglist" class="btn btn-info">Back To List</a>
+</div>
+</body>
+</html>

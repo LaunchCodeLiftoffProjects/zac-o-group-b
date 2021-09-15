@@ -1,0 +1,185 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="https://www.thymeleaf.org/">-->
+<!--<head th:fragment="head">-->
+<!--    <meta charset="UTF-8"/>-->
+<!--    <title th:text="${title}">Stay Fresh Fridge</title>-->
+
+<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>-->
+<!--    <script src="/js/script.js"></script>-->
+<!--    <link rel="stylesheet" th:href="@{/styles.css}">-->
+<!--</head>-->
+<!--<body>-->
+<!--    <div th:fragment="header">-->
+<!--        <div>-->
+
+<!--        </div>-->
+<!--    <nav  class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">-->
+<!--        <div class="container-fluid">-->
+<!--            <a class="navbar-brand" href="/index">-->
+<!--                <img th:src="@{/images/blankfridge.png}" alt="Stay Fresh Fridge logo" width="30" height="50">-->
+<!--            </a>-->
+<!--            <ul class="navbar-nav me-auto mb-2 mb-lg-0">-->
+<!--                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/index">Home</a></li>-->
+<!--                <li class="nav-item"><a class="nav-link" href="/shoppinglist">Shopping List</a></li>-->
+<!--                <li class="nav-item"><a class="nav-link" href="/fridge">Fridge</a></li>-->
+<!--                <li class="nav-item"><a class="nav-link" href="/recipes">Recipes</a></li>-->
+
+<!--            </ul>-->
+
+<!--        </div>-->
+
+<!--    </nav>-->
+<!--        <div>-->
+<!--            <h1 class="display-3 text-center">-->
+<!--                <span class="border-bottom border-success border-4">Stay Fresh Fridge</span>-->
+<!--            </h1>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    // Create a warning alert block that only appears when food is 5 days from expiring.-->
+
+<!--    <div th:fragment="alert" class="alert alert-warning alert-dismissible fade show text-center" role="alert">-->
+<!--        <a href="/fridge" class="alert-link">This is the alert for food expiring in 5 days!</a>-->
+<!--        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>-->
+<!--    </div>-->
+
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:fragment="head">
+    <meta charset="UTF-8"/>
+    <title th:text="${title}">Stay Fresh Fridge</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sidebars/">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/sidebars.css}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script th:src="@{/js/bootstrap.js}"></script>
+    <script th:src="@{/js/script.js}"></script>
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="home" viewBox="0 0 16 16">
+            <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"/>
+        </symbol>
+        <symbol id="calendar3" viewBox="0 0 16 16">
+            <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+            <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+        </symbol>
+        <symbol id="shopping-list" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z"/>
+            <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+        </symbol>
+        <symbol id="cart" viewBox="0 0 16 16">
+            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+        </symbol>
+        <symbol id="recipes" viewBox="0 0 16 16">
+            <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1v4.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 13.5V9a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h1.217L5.07 1.243a.5.5 0 0 1 .686-.172zM2 9v4.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V9H2zM1 7v1h14V7H1zm3 3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 4 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 6 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 8 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5z"/>
+        </symbol>
+        <symbol id="fridge" viewBox="0 0 16 16">
+            <path d="M8.5 10c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
+            <path d="M10.828.122A.5.5 0 0 1 11 .5V1h.5A1.5 1.5 0 0 1 13 2.5V15h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117zM11.5 2H11v13h1V2.5a.5.5 0 0 0-.5-.5zM4 1.934V15h6V1.077l-6 .857z"/>
+        </symbol>
+    </svg>
+
+</head>
+<body>
+
+
+<nav th:fragment="header" class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+
+    <div class="container-fluid text-white bg-dark">
+        <a class="navbar-brand" href="home">
+            <img th:src="@{/images/logo1.png}" alt="Stay Fresh Fridge logo">
+            <span class="fs-4"> Recipe World</span>
+        </a>
+
+        <!--ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="/index">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/shoppinglist">Shopping List</a></li>
+            <li class="nav-item"><a class="nav-link" href="/fridge">Fridge</a></li>
+            <li class="nav-item"><a class="nav-link" href="/recipes">Recipes</a></li>
+        </ul-->
+
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a th:href="@{/home}" th:if="${page == 'home'}" class="nav-link active" aria-current="page">
+                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+                    Home
+                </a>
+                <a th:href="@{/home}" th:unless="${page == 'home'}"  class="nav-link text-white" aria-current="page">
+                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+                    Home
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/recipe}" th:if="${page == 'recipe'}" class="nav-link active">
+                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#recipes"/></svg>
+                    Recipes
+                </a>
+
+                <a th:href="@{/recipe}" th:unless="${page == 'recipe'}" class="nav-link text-white">
+                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#recipes"/></svg>
+                    Recipes
+                </a>
+            </li>
+            <li>
+                <a href="fridge" th:if="${page == 'fridge'}" class="nav-link active">
+                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#fridge"/></svg>
+                    Fridge
+                </a>
+                <a href="fridge" th:unless="${page == 'fridge'}" class="nav-link text-white">
+                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#fridge"/></svg>
+                    Fridge
+                </a>
+            </li>
+            <li>
+                <a href="shoppinglist" th:if="${page == 'shopping'}" class="nav-link active">
+                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#shopping-list"/></svg>
+                    Shopping List
+                </a>
+                <a href="shoppinglist" th:unless="${page == 'shopping'}" class="nav-link text-white">
+                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#shopping-list"/></svg>
+                    Shopping List
+                </a>
+            </li>
+            <li>
+                <a href="cart" th:if="${page == 'cart'}" class="nav-link active">
+                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#cart"/></svg>
+                    Cart
+                </a>
+                <a href="cart" th:unless="${page == 'cart'}" class="nav-link text-white">
+                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#cart"/></svg>
+                    Cart
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+// Create a warning alert block that only appears when food is 5 days from expiring.
+
+<div th:fragment="alert" class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+    <a href="/fridge" class="alert-link">This is the alert for food expiring in 5 days!</a>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+</body>
+</html>
