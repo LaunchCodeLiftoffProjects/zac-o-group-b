@@ -1,0 +1,69 @@
+Index: src/main/resources/templates/savegreen/shoppinglist/shoppinglist.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html lang=\"en\" xmlns:th=\"https://www.thymeleaf.org/\">\r\n<head th:replace=\"fragments :: head\"></head>\r\n\r\n<body onload=\"displayShoppingList()\">\r\n    <header th:replace=\"fragments :: header\"></header>\r\n\r\n<h1 class=\"display-6 text-center\" >Shopping List</h1>\r\n\r\n\r\n<div class=\"list-group list-group-flush fs-3 fw-bold\" id=\"shoppinglist\">\r\n\r\n</div>\r\n\r\n    <div>\r\n\r\n        <form action=\"shoppinglist\" method=\"post\" class=\"row\">\r\n        <div class=\"col-md-6\">\r\n            <input id=\"itemName\" type=\"text\" class=\"form-control\" placeholder=\"Item Name\" name=\"name\" value=\"\">\r\n\r\n        </div>\r\n        <div class=\"col-md-6\">\r\n            <input id=\"expires\" type=\"date\" class=\"form-control\" placeholder=\"Expires: \" name=\"expires\" value=\"\">\r\n\r\n        </div><br>\r\n\r\n\r\n        </form><br>\r\n        <div class=\"d-grid gap-2 col-6 mx-auto\">\r\n            <button id=\"addItem\" class=\"btn btn-dark\" onclick=\"createGroceryItem()\">Add Item</button><br>\r\n        </div>\r\n\r\n    </div>\r\n\r\n        <div class=\"d-grid gap-2 col-6 mx-auto\">\r\n            <button id=\"deleteSelected\" class=\"btn btn-danger\" onclick=\"deleteSelectedShoppingList()\">Delete Checked Items</button>\r\n        </div><br>\r\n\r\n    <div class=\"d-grid gap-2 col-6 mx-auto\">\r\n        <button class=\"btn btn-info\" onclick=\"moveSelected()\">Move Checked To Fridge</button>\r\n    </div><br>\r\n\r\n    <div class=\"d-grid gap-2 col-6 mx-auto\">\r\n        <button id=\"deleteAll\" class=\"btn btn-danger\" onclick=\"deleteAllShoppingList()\">Clear List</button>\r\n    </div><br>\r\n\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/templates/savegreen/shoppinglist/shoppinglist.html b/src/main/resources/templates/savegreen/shoppinglist/shoppinglist.html
+--- a/src/main/resources/templates/savegreen/shoppinglist/shoppinglist.html	(revision cd93d1cd5f7cd5712cb48d64439bb4baf77f27cd)
++++ b/src/main/resources/templates/savegreen/shoppinglist/shoppinglist.html	(date 1631565165140)
+@@ -16,12 +16,16 @@
+ 
+         <form action="shoppinglist" method="post" class="row">
+         <div class="col-md-6">
++            <label for="itemName" class="col-md-6 col-form-label text-center">Item</label>
++            <div class="col-md-10">
+             <input id="itemName" type="text" class="form-control" placeholder="Item Name" name="name" value="">
+-
++            </div>
+         </div>
+         <div class="col-md-6">
+-            <input id="expires" type="date" class="form-control" placeholder="Expires: " name="expires" value="">
+-
++            <label for="expires" class="col-md-6 col-form-label text-center">Expires: (optional)</label>
++            <div class="col-md-10">
++            <input id="expires" type="date" class="form-control" name="expires" value="">
++            </div>
+         </div><br>
+ 
+ 
+Index: src/main/resources/static/js/script.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>function createGroceryItem() {\r\n    let shoppingList = JSON.parse(localStorage.getItem('shoppinglist') || \"[]\");\r\n    let itemName = document.getElementById('itemName');\r\n    let expires = document.getElementById('expires');\r\n    let groceryItem = {item: itemName.value, expires: expires.value};\r\n    shoppingList.push(groceryItem);\r\n    localStorage.setItem('shoppinglist', JSON.stringify(shoppingList));\r\n    let listItem = document.createElement(\"P\");\r\n    listItem.setAttribute(\"name\", \"list_item\")\r\n    listItem.innerHTML = '<label class=\"list-group-item\"><input name=\"check\" class=\"form-check-input me-2\" type=\"checkbox\" value=\"\">' + \" \" + itemName.value + '</label>';\r\n    document.getElementById('shoppinglist').appendChild(listItem);\r\n    itemName.value = \"\";\r\n    expires.value = \"\";\r\n}\r\n\r\nfunction createFridgeItem() {\r\n    let parsedFridgeList = JSON.parse(localStorage.getItem('fridge') || \"[]\");\r\n    let itemName = document.getElementById('itemName');\r\n    let expires = document.getElementById('expires');\r\n    let groceryItem = {item: itemName.value, expires: expires.value};\r\n    parsedFridgeList.push(groceryItem);\r\n    localStorage.setItem('fridge', JSON.stringify(parsedFridgeList));\r\n    let listItem = document.createElement(\"P\");\r\n    listItem.setAttribute(\"name\", \"list_item\")\r\n    listItem.innerHTML = '<label class=\"list-group-item\"><input name=\"check\" class=\"form-check-input me-2\" type=\"checkbox\" value=\"\">' + \" \" + itemName.value +\r\n    \"-\" + \" expires: \" + '<span style=\"text-align: right\">' + expires.value + '</span></label>';\r\n    document.getElementById('fridge').appendChild(listItem);\r\n    itemName.value = \"\";\r\n    expires.value = \"\";\r\n}\r\n\r\nfunction displayShoppingList() {\r\n    let parsedShoppingList = JSON.parse(localStorage.getItem('shoppinglist') || \"[]\");\r\n    let list = document.getElementById('shoppinglist');\r\n    for(let item in parsedShoppingList) {\r\n      let itemName = parsedShoppingList[item].item;\r\n      let expires = parsedShoppingList[item].expires;\r\n      let listItem = document.createElement(\"P\");\r\n      listItem.setAttribute(\"name\", \"list_item\")\r\n      listItem.innerHTML = '<label class=\"list-group-item\"><input name=\"check\" type=\"checkbox\" value=\"\">' + \" \" + itemName + '</label>'\r\n      list.appendChild(listItem);\r\n    }\r\n}\r\n\r\n  function displayFridge() {\r\n      let parsedStorage = JSON.parse(localStorage.getItem('fridge') || \"[]\");\r\n      let list = document.getElementById('fridge');\r\n      for(let item in parsedStorage) {\r\n        let itemName = parsedStorage[item].item;\r\n        let expires = parsedStorage[item].expires;\r\n        let newItem = document.createElement(\"P\");\r\n        newItem.setAttribute(\"name\", \"list_item\")\r\n        newItem.innerHTML = '<label class=\"list-group-item\"><input name=\"check\" class=\"form-check-input me-2\" type=\"checkbox\" value=\"\">' + itemName + \" \" +\r\n          \"-\" + \" expires: \" + '<span style=\"text-align: right\">' + expires + '</span></label>';\r\n        document.getElementById('fridge').appendChild(newItem);\r\n\r\n      }\r\n}\r\n\r\nfunction deleteSelectedShoppingList() {\r\n  let parsedShoppingList = JSON.parse(localStorage.getItem('shoppinglist') || \"[]\");\r\n  let listItem = document.getElementsByName(\"list_item\");\r\n  let selected = document.getElementsByName(\"check\");\r\n\r\n  for(let i=0; i < listItem.length; i++) {\r\n    let deleted = listItem.item(i).innerHTML;\r\n    if(selected.item(i).checked && deleted.includes(parsedShoppingList[i].item)) {\r\n        console.log(parsedShoppingList[i].item);\r\n        let destroy = listItem.item(i).remove();\r\n        parsedShoppingList.splice(i, 1);\r\n        localStorage.setItem('shoppinglist', JSON.stringify(parsedShoppingList));\r\n    }\r\n  }\r\n\r\n}\r\n\r\nfunction deleteSelectedFridge() {\r\n  let parsedFridgeList = JSON.parse(localStorage.getItem('fridge') || \"[]\");\r\n  let listItem = document.getElementsByName(\"list_item\");\r\n  let selected = document.getElementsByName(\"check\");\r\n\r\n  for(let i=0; i < listItem.length; i++) {\r\n    let deleted = listItem.item(i).innerHTML;\r\n    if(selected.item(i).checked && deleted.includes(parsedFridgeList[i].item)) {\r\n        console.log(parsedFridgeList[i].item);\r\n        let destroy = listItem.item(i).remove();\r\n        parsedFridgeList.splice(i, 1);\r\n        localStorage.setItem('fridge', JSON.stringify(parsedFridgeList));\r\n    }\r\n  }\r\n\r\n}\r\n\r\nfunction moveSelected() {\r\n  let parsedShoppingList = JSON.parse(localStorage.getItem('shoppinglist') || \"[]\");\r\n  let inFridge = JSON.parse(localStorage.getItem('fridge') || \"[]\");\r\n  let listItem = document.getElementsByName(\"list_item\");\r\n  let selected = document.getElementsByName(\"check\");\r\n\r\n  for(let i=0; i < listItem.length; i++) {\r\n    let moved = listItem.item(i).innerHTML;\r\n    if(selected.item(i).checked && moved.includes(parsedShoppingList[i].item)) {\r\n        let itemName = parsedShoppingList[i].item;\r\n        let expires = parsedShoppingList[i].expires;\r\n        let moveItem = {item: itemName, expires: expires};\r\n        inFridge.push(moveItem);\r\n\r\n        localStorage.setItem('fridge', JSON.stringify(inFridge));\r\n\r\n        let destroy = listItem.item(i).remove();\r\n        parsedShoppingList.splice(i, 1);\r\n        localStorage.setItem('shoppinglist', JSON.stringify(parsedShoppingList));\r\n    }\r\n  }\r\n}\r\n\r\nfunction deleteAllShoppingList() {\r\n  localStorage.removeItem('shoppinglist');\r\n  let deleteList = document.getElementById(\"shoppinglist\");\r\n  while(deleteList.hasChildNodes()) {\r\n    deleteList.removeChild(deleteList.firstChild);\r\n  }\r\n}\r\n\r\n\r\nfunction deleteAllFridge() {\r\n  localStorage.removeItem('fridge');\r\n  let deleteList = document.getElementById(\"fridge\");\r\n  while(deleteList.hasChildNodes()) {\r\n    deleteList.removeChild(deleteList.firstChild);\r\n  }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/static/js/script.js b/src/main/resources/static/js/script.js
+--- a/src/main/resources/static/js/script.js	(revision cd93d1cd5f7cd5712cb48d64439bb4baf77f27cd)
++++ b/src/main/resources/static/js/script.js	(date 1631565284226)
+@@ -2,6 +2,9 @@
+     let shoppingList = JSON.parse(localStorage.getItem('shoppinglist') || "[]");
+     let itemName = document.getElementById('itemName');
+     let expires = document.getElementById('expires');
++    if(itemName.value === "") {
++         return alert("item required");
++        }
+     let groceryItem = {item: itemName.value, expires: expires.value};
+     shoppingList.push(groceryItem);
+     localStorage.setItem('shoppinglist', JSON.stringify(shoppingList));
+@@ -17,6 +20,9 @@
+     let parsedFridgeList = JSON.parse(localStorage.getItem('fridge') || "[]");
+     let itemName = document.getElementById('itemName');
+     let expires = document.getElementById('expires');
++    if(itemName.value === "") {
++         return alert("item required");
++        }
+     let groceryItem = {item: itemName.value, expires: expires.value};
+     parsedFridgeList.push(groceryItem);
+     localStorage.setItem('fridge', JSON.stringify(parsedFridgeList));
+@@ -37,7 +43,7 @@
+       let expires = parsedShoppingList[item].expires;
+       let listItem = document.createElement("P");
+       listItem.setAttribute("name", "list_item")
+-      listItem.innerHTML = '<label class="list-group-item"><input name="check" type="checkbox" value="">' + " " + itemName + '</label>'
++      listItem.innerHTML = '<label class="list-group-item"><input name="check" class="form-check-input me-2" type="checkbox" value="">' + " " + itemName + '</label>'
+       list.appendChild(listItem);
+     }
+ }
