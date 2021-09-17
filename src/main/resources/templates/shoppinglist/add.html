@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+<h1 class="display-3 text-center">Save Green</h1>
+<header th:replace="fragments :: header(page='shopping')"></header>
+<!--<div th:replace="fragments :: alert"></div>-->
+<div class="container-fluid">
+
+    <form method="post" style="max-width:600px;">
+        <div>
+            <h5 class="text-primary">Add Item To Shopping List</h5>
+        </div>
+        <div class="form-group">
+            <label th:for="name" class="text-dark">Item Name</label>
+            <input class="form-control" th:field="${groceryItem.name}" />
+            <span th:errors="${groceryItem.name}" class="error text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label th:for="location" class="text-dark">Expires: </label>
+            <input class="form-control" th:field="${groceryItem.expires}"></input>
+            <span th:errors="${recipe.recipe_details}" class="error text-danger"></span>
+        </div>
+
+        <br>
+        <input type="submit" value="Save" class="btn btn-primary btn-lg active" />
+    </form>
+
+
+</div>
+</body>
+</html>

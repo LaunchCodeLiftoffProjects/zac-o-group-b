@@ -19,7 +19,7 @@ public class RecipeController {
 
     @GetMapping("")
     public String recipe (Model model){
-        model.addAttribute("title", "Recipe Application");
+        model.addAttribute("title", "Recipes");
         model.addAttribute("recipes", recipeRepository.findAll());
         return "recipe/index";
     }

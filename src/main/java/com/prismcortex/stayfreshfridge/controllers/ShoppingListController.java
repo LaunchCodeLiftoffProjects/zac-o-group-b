@@ -1,29 +1,40 @@
 package com.prismcortex.stayfreshfridge.controllers;
 
+import com.prismcortex.stayfreshfridge.data.GroceryItemRepository;
 import com.prismcortex.stayfreshfridge.data.ShoppingListData;
 import com.prismcortex.stayfreshfridge.models.Fridge;
 import com.prismcortex.stayfreshfridge.models.GroceryItem;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RequestMapping("shoppinglist")
 @Controller
 public class ShoppingListController {
 
-    @GetMapping
+    @Autowired
+    private GroceryItemRepository groceryItemRepository;
+
+    @GetMapping("")
     public String displayShoppingList(Model model) {
         model.addAttribute("title", "Shopping List");
-        model.addAttribute("shoppingList", ShoppingListData.getShoppingList());
-        return "shoppinglist/shoppinglist";
+        model.addAttribute("groceryItems", groceryItemRepository.findAll());
+        model.addAttribute(new GroceryItem());
+        return "shoppinglist/index";
     }
     @PostMapping
-    public String createGroceryItem(@RequestParam String name, @RequestParam String expires,
+    public String createGroceryItem(@ModelAttribute @Valid GroceryItem newGroceryItem, Errors errors,
                                     Model model) {
-        ShoppingListData.add(new GroceryItem(name, expires));
-
-        return "redirect:shoppinglist";
+        if (errors.hasErrors()) {
+            return "shoppinglist/index";
+        }
+        groceryItemRepository.save(newGroceryItem);
+        return "redirect: shoppinglist/index";
     }
     @RequestMapping("delete")
     @GetMapping("delete")
