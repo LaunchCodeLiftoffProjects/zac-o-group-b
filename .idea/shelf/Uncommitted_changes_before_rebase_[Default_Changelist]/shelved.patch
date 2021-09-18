@@ -1,0 +1,1166 @@
+Index: GreenSaverAndroid/gradle.properties
+===================================================================
+diff --git a/GreenSaverAndroid/gradle.properties b/GreenSaverAndroid/gradle.properties
+deleted file mode 100644
+--- a/GreenSaverAndroid/gradle.properties	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,21 +0,0 @@
+-# Project-wide Gradle settings.
+-# IDE (e.g. Android Studio) users:
+-# Gradle settings configured through the IDE *will override*
+-# any settings specified in this file.
+-# For more details on how to configure your build environment visit
+-# http://www.gradle.org/docs/current/userguide/build_environment.html
+-# Specifies the JVM arguments used for the daemon process.
+-# The setting is particularly useful for tweaking memory settings.
+-org.gradle.jvmargs=-Xmx2048m -Dfile.encoding=UTF-8
+-# When configured, Gradle will run in incubating parallel mode.
+-# This option should only be used with decoupled projects. More details, visit
+-# http://www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:decoupled_projects
+-# org.gradle.parallel=true
+-# AndroidX package structure to make it clearer which packages are bundled with the
+-# Android operating system, and which are packaged with your app"s APK
+-# https://developer.android.com/topic/libraries/support-library/androidx-rn
+-android.useAndroidX=true
+-# Automatically convert third-party libraries to use AndroidX
+-android.enableJetifier=true
+-# Kotlin code style for this project: "official" or "obsolete":
+-kotlin.code.style=official
+\ No newline at end of file
+Index: GreenSaverAndroid/app/src/main/java/com/example/savegreen/ui/main/SectionsPagerAdapter.kt
+===================================================================
+diff --git a/GreenSaverAndroid/app/src/main/java/com/example/savegreen/ui/main/SectionsPagerAdapter.kt b/GreenSaverAndroid/app/src/main/java/com/example/savegreen/ui/main/SectionsPagerAdapter.kt
+deleted file mode 100644
+--- a/GreenSaverAndroid/app/src/main/java/com/example/savegreen/ui/main/SectionsPagerAdapter.kt	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,35 +0,0 @@
+-package com.example.savegreen.ui.main
+-
+-import android.content.Context
+-import androidx.fragment.app.Fragment
+-import androidx.fragment.app.FragmentManager
+-import androidx.fragment.app.FragmentPagerAdapter
+-import com.example.savegreen.R
+-
+-private val TAB_TITLES = arrayOf(
+-        R.string.tab_text_1,
+-        R.string.tab_text_2
+-)
+-
+-/**
+- * A [FragmentPagerAdapter] that returns a fragment corresponding to
+- * one of the sections/tabs/pages.
+- */
+-class SectionsPagerAdapter(private val context: Context, fm: FragmentManager)
+-    : FragmentPagerAdapter(fm) {
+-
+-    override fun getItem(position: Int): Fragment {
+-        // getItem is called to instantiate the fragment for the given page.
+-        // Return a PlaceholderFragment (defined as a static inner class below).
+-        return PlaceholderFragment.newInstance(position + 1)
+-    }
+-
+-    override fun getPageTitle(position: Int): CharSequence? {
+-        return context.resources.getString(TAB_TITLES[position])
+-    }
+-
+-    override fun getCount(): Int {
+-        // Show 2 total pages.
+-        return 2
+-    }
+-}
+\ No newline at end of file
+Index: GreenSaverAndroid/.idea/codeStyles/codeStyleConfig.xml
+===================================================================
+diff --git a/GreenSaverAndroid/.idea/codeStyles/codeStyleConfig.xml b/GreenSaverAndroid/.idea/codeStyles/codeStyleConfig.xml
+deleted file mode 100644
+--- a/GreenSaverAndroid/.idea/codeStyles/codeStyleConfig.xml	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,5 +0,0 @@
+-<component name="ProjectCodeStyleConfiguration">
+-  <state>
+-    <option name="USE_PER_PROJECT_SETTINGS" value="true" />
+-  </state>
+-</component>
+\ No newline at end of file
+Index: GreenSaverAndroid/app/src/main/java/com/example/savegreen/ui/main/PlaceholderFragment.kt
+===================================================================
+diff --git a/GreenSaverAndroid/app/src/main/java/com/example/savegreen/ui/main/PlaceholderFragment.kt b/GreenSaverAndroid/app/src/main/java/com/example/savegreen/ui/main/PlaceholderFragment.kt
+deleted file mode 100644
+--- a/GreenSaverAndroid/app/src/main/java/com/example/savegreen/ui/main/PlaceholderFragment.kt	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,73 +0,0 @@
+-package com.example.savegreen.ui.main
+-
+-import android.os.Bundle
+-import android.view.LayoutInflater
+-import android.view.View
+-import android.view.ViewGroup
+-import android.widget.TextView
+-import androidx.fragment.app.Fragment
+-import androidx.lifecycle.Observer
+-import androidx.lifecycle.ViewModelProvider
+-import com.example.savegreen.R
+-import com.example.savegreen.databinding.FragmentMainBinding
+-
+-/**
+- * A placeholder fragment containing a simple view.
+- */
+-class PlaceholderFragment : Fragment() {
+-
+-    private lateinit var pageViewModel: PageViewModel
+-    private var _binding: FragmentMainBinding? = null
+-
+-    // This property is only valid between onCreateView and
+-    // onDestroyView.
+-    private val binding get() = _binding!!
+-
+-    override fun onCreate(savedInstanceState: Bundle?) {
+-        super.onCreate(savedInstanceState)
+-        pageViewModel = ViewModelProvider(this).get(PageViewModel::class.java).apply {
+-            setIndex(arguments?.getInt(ARG_SECTION_NUMBER) ?: 1)
+-        }
+-    }
+-
+-    override fun onCreateView(
+-            inflater: LayoutInflater, container: ViewGroup?,
+-            savedInstanceState: Bundle?
+-    ): View? {
+-
+-        _binding = FragmentMainBinding.inflate(inflater, container, false)
+-        val root = binding.root
+-
+-        val textView: TextView = binding.sectionLabel
+-        pageViewModel.text.observe(viewLifecycleOwner, Observer {
+-            textView.text = it
+-        })
+-        return root
+-    }
+-
+-    companion object {
+-        /**
+-         * The fragment argument representing the section number for this
+-         * fragment.
+-         */
+-        private const val ARG_SECTION_NUMBER = "section_number"
+-
+-        /**
+-         * Returns a new instance of this fragment for the given section
+-         * number.
+-         */
+-        @JvmStatic
+-        fun newInstance(sectionNumber: Int): PlaceholderFragment {
+-            return PlaceholderFragment().apply {
+-                arguments = Bundle().apply {
+-                    putInt(ARG_SECTION_NUMBER, sectionNumber)
+-                }
+-            }
+-        }
+-    }
+-
+-    override fun onDestroyView() {
+-        super.onDestroyView()
+-        _binding = null
+-    }
+-}
+\ No newline at end of file
+Index: GreenSaverAndroid/app/src/main/res/drawable-v24/ic_launcher_foreground.xml
+===================================================================
+diff --git a/GreenSaverAndroid/app/src/main/res/drawable-v24/ic_launcher_foreground.xml b/GreenSaverAndroid/app/src/main/res/drawable-v24/ic_launcher_foreground.xml
+deleted file mode 100644
+--- a/GreenSaverAndroid/app/src/main/res/drawable-v24/ic_launcher_foreground.xml	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,30 +0,0 @@
+-<vector xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:aapt="http://schemas.android.com/aapt"
+-    android:width="108dp"
+-    android:height="108dp"
+-    android:viewportWidth="108"
+-    android:viewportHeight="108">
+-    <path android:pathData="M31,63.928c0,0 6.4,-11 12.1,-13.1c7.2,-2.6 26,-1.4 26,-1.4l38.1,38.1L107,108.928l-32,-1L31,63.928z">
+-        <aapt:attr name="android:fillColor">
+-            <gradient
+-                android:endX="85.84757"
+-                android:endY="92.4963"
+-                android:startX="42.9492"
+-                android:startY="49.59793"
+-                android:type="linear">
+-                <item
+-                    android:color="#44000000"
+-                    android:offset="0.0" />
+-                <item
+-                    android:color="#00000000"
+-                    android:offset="1.0" />
+-            </gradient>
+-        </aapt:attr>
+-    </path>
+-    <path
+-        android:fillColor="#FFFFFF"
+-        android:fillType="nonZero"
+-        android:pathData="M65.3,45.828l3.8,-6.6c0.2,-0.4 0.1,-0.9 -0.3,-1.1c-0.4,-0.2 -0.9,-0.1 -1.1,0.3l-3.9,6.7c-6.3,-2.8 -13.4,-2.8 -19.7,0l-3.9,-6.7c-0.2,-0.4 -0.7,-0.5 -1.1,-0.3C38.8,38.328 38.7,38.828 38.9,39.228l3.8,6.6C36.2,49.428 31.7,56.028 31,63.928h46C76.3,56.028 71.8,49.428 65.3,45.828zM43.4,57.328c-0.8,0 -1.5,-0.5 -1.8,-1.2c-0.3,-0.7 -0.1,-1.5 0.4,-2.1c0.5,-0.5 1.4,-0.7 2.1,-0.4c0.7,0.3 1.2,1 1.2,1.8C45.3,56.528 44.5,57.328 43.4,57.328L43.4,57.328zM64.6,57.328c-0.8,0 -1.5,-0.5 -1.8,-1.2s-0.1,-1.5 0.4,-2.1c0.5,-0.5 1.4,-0.7 2.1,-0.4c0.7,0.3 1.2,1 1.2,1.8C66.5,56.528 65.6,57.328 64.6,57.328L64.6,57.328z"
+-        android:strokeWidth="1"
+-        android:strokeColor="#00000000" />
+-</vector>
+\ No newline at end of file
+Index: GreenSaverAndroid/app/src/main/res/drawable/ic_launcher_background.xml
+===================================================================
+diff --git a/GreenSaverAndroid/app/src/main/res/drawable/ic_launcher_background.xml b/GreenSaverAndroid/app/src/main/res/drawable/ic_launcher_background.xml
+deleted file mode 100644
+--- a/GreenSaverAndroid/app/src/main/res/drawable/ic_launcher_background.xml	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,170 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<vector xmlns:android="http://schemas.android.com/apk/res/android"
+-    android:width="108dp"
+-    android:height="108dp"
+-    android:viewportWidth="108"
+-    android:viewportHeight="108">
+-    <path
+-        android:fillColor="#3DDC84"
+-        android:pathData="M0,0h108v108h-108z" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M9,0L9,108"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M19,0L19,108"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M29,0L29,108"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M39,0L39,108"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M49,0L49,108"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M59,0L59,108"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M69,0L69,108"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M79,0L79,108"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M89,0L89,108"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M99,0L99,108"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M0,9L108,9"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M0,19L108,19"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M0,29L108,29"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M0,39L108,39"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M0,49L108,49"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M0,59L108,59"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M0,69L108,69"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M0,79L108,79"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M0,89L108,89"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M0,99L108,99"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M19,29L89,29"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M19,39L89,39"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M19,49L89,49"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M19,59L89,59"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M19,69L89,69"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M19,79L89,79"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M29,19L29,89"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M39,19L39,89"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M49,19L49,89"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M59,19L59,89"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M69,19L69,89"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-    <path
+-        android:fillColor="#00000000"
+-        android:pathData="M79,19L79,89"
+-        android:strokeWidth="0.8"
+-        android:strokeColor="#33FFFFFF" />
+-</vector>
+Index: GreenSaverAndroid/app/src/main/res/values-w820dp/dimens.xml
+===================================================================
+diff --git a/GreenSaverAndroid/app/src/main/res/values-w820dp/dimens.xml b/GreenSaverAndroid/app/src/main/res/values-w820dp/dimens.xml
+deleted file mode 100644
+--- a/GreenSaverAndroid/app/src/main/res/values-w820dp/dimens.xml	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,6 +0,0 @@
+-<resources>
+-    <!-- Example customization of dimensions originally defined in res/values/dimens.xml
+-         (such as screen margins) for screens with more than 820dp of available width. This
+-         would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively). -->
+-    <dimen name="activity_horizontal_margin">64dp</dimen>
+-</resources>
+\ No newline at end of file
+Index: GreenSaverAndroid/app/src/main/res/values/colors.xml
+===================================================================
+diff --git a/GreenSaverAndroid/app/src/main/res/values/colors.xml b/GreenSaverAndroid/app/src/main/res/values/colors.xml
+deleted file mode 100644
+--- a/GreenSaverAndroid/app/src/main/res/values/colors.xml	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,10 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<resources>
+-    <color name="purple_200">#FFBB86FC</color>
+-    <color name="purple_500">#FF6200EE</color>
+-    <color name="purple_700">#FF3700B3</color>
+-    <color name="teal_200">#FF03DAC5</color>
+-    <color name="teal_700">#FF018786</color>
+-    <color name="black">#FF000000</color>
+-    <color name="white">#FFFFFFFF</color>
+-</resources>
+\ No newline at end of file
+Index: GreenSaverAndroid/app/src/main/res/values/dimens.xml
+===================================================================
+diff --git a/GreenSaverAndroid/app/src/main/res/values/dimens.xml b/GreenSaverAndroid/app/src/main/res/values/dimens.xml
+deleted file mode 100644
+--- a/GreenSaverAndroid/app/src/main/res/values/dimens.xml	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,8 +0,0 @@
+-<resources>
+-    <!-- Default screen margins, per the Android Design guidelines. -->
+-    <dimen name="activity_horizontal_margin">16dp</dimen>
+-    <dimen name="activity_vertical_margin">16dp</dimen>
+-    <dimen name="appbar_padding">16dp</dimen>
+-    <dimen name="fab_margin">16dp</dimen>
+-    <dimen name="appbar_padding_top">8dp</dimen>
+-</resources>
+\ No newline at end of file
+Index: GreenSaverAndroid/app/src/androidTest/java/com/example/savegreen/ExampleInstrumentedTest.kt
+===================================================================
+diff --git a/GreenSaverAndroid/app/src/androidTest/java/com/example/savegreen/ExampleInstrumentedTest.kt b/GreenSaverAndroid/app/src/androidTest/java/com/example/savegreen/ExampleInstrumentedTest.kt
+deleted file mode 100644
+--- a/GreenSaverAndroid/app/src/androidTest/java/com/example/savegreen/ExampleInstrumentedTest.kt	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,24 +0,0 @@
+-package com.example.savegreen
+-
+-import androidx.test.platform.app.InstrumentationRegistry
+-import androidx.test.ext.junit.runners.AndroidJUnit4
+-
+-import org.junit.Test
+-import org.junit.runner.RunWith
+-
+-import org.junit.Assert.*
+-
+-/**
+- * Instrumented test, which will execute on an Android device.
+- *
+- * See [testing documentation](http://d.android.com/tools/testing).
+- */
+-@RunWith(AndroidJUnit4::class)
+-class ExampleInstrumentedTest {
+-    @Test
+-    fun useAppContext() {
+-        // Context of the app under test.
+-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
+-        assertEquals("com.example.savegreen", appContext.packageName)
+-    }
+-}
+\ No newline at end of file
+Index: GreenSaverAndroid/app/build.gradle
+===================================================================
+diff --git a/GreenSaverAndroid/app/build.gradle b/GreenSaverAndroid/app/build.gradle
+deleted file mode 100644
+--- a/GreenSaverAndroid/app/build.gradle	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,48 +0,0 @@
+-plugins {
+-    id 'com.android.application'
+-    id 'kotlin-android'
+-}
+-
+-android {
+-    compileSdk 31
+-
+-    defaultConfig {
+-        applicationId "com.example.savegreen"
+-        minSdk 21
+-        targetSdk 31
+-        versionCode 1
+-        versionName "1.0"
+-
+-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+-    }
+-
+-    buildTypes {
+-        release {
+-            minifyEnabled false
+-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+-        }
+-    }
+-    compileOptions {
+-        sourceCompatibility JavaVersion.VERSION_1_8
+-        targetCompatibility JavaVersion.VERSION_1_8
+-    }
+-    kotlinOptions {
+-        jvmTarget = '1.8'
+-    }
+-    buildFeatures {
+-        viewBinding true
+-    }
+-}
+-
+-dependencies {
+-
+-    implementation 'androidx.core:core-ktx:1.3.2'
+-    implementation 'androidx.appcompat:appcompat:1.2.0'
+-    implementation 'com.google.android.material:material:1.3.0'
+-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
+-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+-    testImplementation 'junit:junit:4.+'
+-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+-}
+\ No newline at end of file
+Index: GreenSaverAndroid/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml
+===================================================================
+diff --git a/GreenSaverAndroid/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml b/GreenSaverAndroid/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml
+deleted file mode 100644
+--- a/GreenSaverAndroid/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,5 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+-    <background android:drawable="@drawable/ic_launcher_background" />
+-    <foreground android:drawable="@drawable/ic_launcher_foreground" />
+-</adaptive-icon>
+\ No newline at end of file
+Index: GreenSaverAndroid/.idea/compiler.xml
+===================================================================
+diff --git a/GreenSaverAndroid/.idea/compiler.xml b/GreenSaverAndroid/.idea/compiler.xml
+deleted file mode 100644
+--- a/GreenSaverAndroid/.idea/compiler.xml	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,6 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="CompilerConfiguration">
+-    <bytecodeTargetLevel target="11" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: GreenSaverAndroid/app/src/main/java/com/example/savegreen/ui/main/PageViewModel.kt
+===================================================================
+diff --git a/GreenSaverAndroid/app/src/main/java/com/example/savegreen/ui/main/PageViewModel.kt b/GreenSaverAndroid/app/src/main/java/com/example/savegreen/ui/main/PageViewModel.kt
+deleted file mode 100644
+--- a/GreenSaverAndroid/app/src/main/java/com/example/savegreen/ui/main/PageViewModel.kt	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,19 +0,0 @@
+-package com.example.savegreen.ui.main
+-
+-import androidx.lifecycle.LiveData
+-import androidx.lifecycle.MutableLiveData
+-import androidx.lifecycle.Transformations
+-import androidx.lifecycle.ViewModel
+-import androidx.lifecycle.ViewModelProvider
+-
+-class PageViewModel : ViewModel() {
+-
+-    private val _index = MutableLiveData<Int>()
+-    val text: LiveData<String> = Transformations.map(_index) {
+-        "Hello world from section: $it"
+-    }
+-
+-    fun setIndex(index: Int) {
+-        _index.value = index
+-    }
+-}
+\ No newline at end of file
+Index: GreenSaverAndroid/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml
+===================================================================
+diff --git a/GreenSaverAndroid/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml b/GreenSaverAndroid/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml
+deleted file mode 100644
+--- a/GreenSaverAndroid/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,5 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+-    <background android:drawable="@drawable/ic_launcher_background" />
+-    <foreground android:drawable="@drawable/ic_launcher_foreground" />
+-</adaptive-icon>
+\ No newline at end of file
+Index: GreenSaverAndroid/app/src/main/res/values/themes.xml
+===================================================================
+diff --git a/GreenSaverAndroid/app/src/main/res/values/themes.xml b/GreenSaverAndroid/app/src/main/res/values/themes.xml
+deleted file mode 100644
+--- a/GreenSaverAndroid/app/src/main/res/values/themes.xml	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,25 +0,0 @@
+-<resources xmlns:tools="http://schemas.android.com/tools">
+-    <!-- Base application theme. -->
+-    <style name="Theme.SaveGreen" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+-        <!-- Primary brand color. -->
+-        <item name="colorPrimary">@color/purple_500</item>
+-        <item name="colorPrimaryVariant">@color/purple_700</item>
+-        <item name="colorOnPrimary">@color/white</item>
+-        <!-- Secondary brand color. -->
+-        <item name="colorSecondary">@color/teal_200</item>
+-        <item name="colorSecondaryVariant">@color/teal_700</item>
+-        <item name="colorOnSecondary">@color/black</item>
+-        <!-- Status bar color. -->
+-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+-        <!-- Customize your theme here. -->
+-    </style>
+-
+-    <style name="Theme.SaveGreen.NoActionBar">
+-        <item name="windowActionBar">false</item>
+-        <item name="windowNoTitle">true</item>
+-    </style>
+-
+-    <style name="Theme.SaveGreen.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+-
+-    <style name="Theme.SaveGreen.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+-</resources>
+\ No newline at end of file
+Index: GreenSaverAndroid/app/src/main/res/values-w1240dp/dimens.xml
+===================================================================
+diff --git a/GreenSaverAndroid/app/src/main/res/values-w1240dp/dimens.xml b/GreenSaverAndroid/app/src/main/res/values-w1240dp/dimens.xml
+deleted file mode 100644
+--- a/GreenSaverAndroid/app/src/main/res/values-w1240dp/dimens.xml	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,3 +0,0 @@
+-<resources>
+-    <dimen name="fab_margin">200dp</dimen>
+-</resources>
+\ No newline at end of file
+Index: GreenSaverAndroid/build.gradle
+===================================================================
+diff --git a/GreenSaverAndroid/build.gradle b/GreenSaverAndroid/build.gradle
+deleted file mode 100644
+--- a/GreenSaverAndroid/build.gradle	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,18 +0,0 @@
+-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+-buildscript {
+-    repositories {
+-        google()
+-        mavenCentral()
+-    }
+-    dependencies {
+-        classpath "com.android.tools.build:gradle:7.0.1"
+-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21"
+-
+-        // NOTE: Do not place your application dependencies here; they belong
+-        // in the individual module build.gradle files
+-    }
+-}
+-
+-task clean(type: Delete) {
+-    delete rootProject.buildDir
+-}
+\ No newline at end of file
+Index: GreenSaverAndroid/gradle/wrapper/gradle-wrapper.properties
+===================================================================
+diff --git a/GreenSaverAndroid/gradle/wrapper/gradle-wrapper.properties b/GreenSaverAndroid/gradle/wrapper/gradle-wrapper.properties
+deleted file mode 100644
+--- a/GreenSaverAndroid/gradle/wrapper/gradle-wrapper.properties	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,6 +0,0 @@
+-#Sun Aug 22 13:20:25 CDT 2021
+-distributionBase=GRADLE_USER_HOME
+-distributionUrl=https\://services.gradle.org/distributions/gradle-7.0.2-bin.zip
+-distributionPath=wrapper/dists
+-zipStorePath=wrapper/dists
+-zipStoreBase=GRADLE_USER_HOME
+Index: GreenSaverAndroid/app/src/main/java/com/example/savegreen/MainActivity.kt
+===================================================================
+diff --git a/GreenSaverAndroid/app/src/main/java/com/example/savegreen/MainActivity.kt b/GreenSaverAndroid/app/src/main/java/com/example/savegreen/MainActivity.kt
+deleted file mode 100644
+--- a/GreenSaverAndroid/app/src/main/java/com/example/savegreen/MainActivity.kt	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,36 +0,0 @@
+-package com.example.savegreen
+-
+-import android.os.Bundle
+-import com.google.android.material.floatingactionbutton.FloatingActionButton
+-import com.google.android.material.snackbar.Snackbar
+-import com.google.android.material.tabs.TabLayout
+-import androidx.viewpager.widget.ViewPager
+-import androidx.appcompat.app.AppCompatActivity
+-import android.view.Menu
+-import android.view.MenuItem
+-import com.example.savegreen.ui.main.SectionsPagerAdapter
+-import com.example.savegreen.databinding.ActivityMainBinding
+-
+-class MainActivity : AppCompatActivity() {
+-
+-    private lateinit var binding: ActivityMainBinding
+-
+-    override fun onCreate(savedInstanceState: Bundle?) {
+-        super.onCreate(savedInstanceState)
+-
+-        binding = ActivityMainBinding.inflate(layoutInflater)
+-        setContentView(binding.root)
+-
+-        val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
+-        val viewPager: ViewPager = binding.viewPager
+-        viewPager.adapter = sectionsPagerAdapter
+-        val tabs: TabLayout = binding.tabs
+-        tabs.setupWithViewPager(viewPager)
+-        val fab: FloatingActionButton = binding.fab
+-
+-        fab.setOnClickListener { view ->
+-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+-                    .setAction("Action", null).show()
+-        }
+-    }
+-}
+\ No newline at end of file
+Index: GreenSaverAndroid/.idea/gradle.xml
+===================================================================
+diff --git a/GreenSaverAndroid/.idea/gradle.xml b/GreenSaverAndroid/.idea/gradle.xml
+deleted file mode 100644
+--- a/GreenSaverAndroid/.idea/gradle.xml	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,20 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="GradleMigrationSettings" migrationVersion="1" />
+-  <component name="GradleSettings">
+-    <option name="linkedExternalProjectsSettings">
+-      <GradleProjectSettings>
+-        <option name="testRunner" value="GRADLE" />
+-        <option name="distributionType" value="DEFAULT_WRAPPED" />
+-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+-        <option name="modules">
+-          <set>
+-            <option value="$PROJECT_DIR$" />
+-            <option value="$PROJECT_DIR$/app" />
+-          </set>
+-        </option>
+-        <option name="resolveModulePerSourceSet" value="false" />
+-      </GradleProjectSettings>
+-    </option>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: GreenSaverAndroid/.gitignore
+===================================================================
+diff --git a/GreenSaverAndroid/.gitignore b/GreenSaverAndroid/.gitignore
+deleted file mode 100644
+--- a/GreenSaverAndroid/.gitignore	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,15 +0,0 @@
+-*.iml
+-.gradle
+-/local.properties
+-/.idea/caches
+-/.idea/libraries
+-/.idea/modules.xml
+-/.idea/workspace.xml
+-/.idea/navEditor.xml
+-/.idea/assetWizardSettings.xml
+-.DS_Store
+-/build
+-/captures
+-.externalNativeBuild
+-.cxx
+-local.properties
+Index: GreenSaverAndroid/app/src/main/res/layout/activity_main.xml
+===================================================================
+diff --git a/GreenSaverAndroid/app/src/main/res/layout/activity_main.xml b/GreenSaverAndroid/app/src/main/res/layout/activity_main.xml
+deleted file mode 100644
+--- a/GreenSaverAndroid/app/src/main/res/layout/activity_main.xml	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,44 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:app="http://schemas.android.com/apk/res-auto"
+-    xmlns:tools="http://schemas.android.com/tools"
+-    android:layout_width="match_parent"
+-    android:layout_height="match_parent"
+-    tools:context=".MainActivity">
+-
+-    <com.google.android.material.appbar.AppBarLayout
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:theme="@style/Theme.SaveGreen.AppBarOverlay">
+-
+-        <TextView
+-            android:id="@+id/title"
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:gravity="center"
+-            android:minHeight="?actionBarSize"
+-            android:padding="@dimen/appbar_padding"
+-            android:text="@string/app_name"
+-            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
+-
+-        <com.google.android.material.tabs.TabLayout
+-            android:id="@+id/tabs"
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content" />
+-    </com.google.android.material.appbar.AppBarLayout>
+-
+-    <androidx.viewpager.widget.ViewPager
+-        android:id="@+id/view_pager"
+-        android:layout_width="match_parent"
+-        android:layout_height="match_parent"
+-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+-
+-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+-        android:id="@+id/fab"
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:layout_gravity="bottom|end"
+-        android:layout_marginEnd="@dimen/fab_margin"
+-        android:layout_marginBottom="16dp"
+-        app:srcCompat="@android:drawable/ic_dialog_email" />
+-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+\ No newline at end of file
+Index: GreenSaverAndroid/app/src/main/AndroidManifest.xml
+===================================================================
+diff --git a/GreenSaverAndroid/app/src/main/AndroidManifest.xml b/GreenSaverAndroid/app/src/main/AndroidManifest.xml
+deleted file mode 100644
+--- a/GreenSaverAndroid/app/src/main/AndroidManifest.xml	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,25 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+-    package="com.example.savegreen">
+-
+-    <application
+-        android:allowBackup="true"
+-        android:icon="@mipmap/ic_launcher"
+-        android:label="@string/app_name"
+-        android:roundIcon="@mipmap/ic_launcher_round"
+-        android:supportsRtl="true"
+-        android:theme="@style/Theme.SaveGreen">
+-        <activity
+-            android:name=".MainActivity"
+-            android:exported="true"
+-            android:label="@string/app_name"
+-            android:theme="@style/Theme.SaveGreen.NoActionBar">
+-            <intent-filter>
+-                <action android:name="android.intent.action.MAIN" />
+-
+-                <category android:name="android.intent.category.LAUNCHER" />
+-            </intent-filter>
+-        </activity>
+-    </application>
+-
+-</manifest>
+\ No newline at end of file
+Index: GreenSaverAndroid/app/src/test/java/com/example/savegreen/ExampleUnitTest.kt
+===================================================================
+diff --git a/GreenSaverAndroid/app/src/test/java/com/example/savegreen/ExampleUnitTest.kt b/GreenSaverAndroid/app/src/test/java/com/example/savegreen/ExampleUnitTest.kt
+deleted file mode 100644
+--- a/GreenSaverAndroid/app/src/test/java/com/example/savegreen/ExampleUnitTest.kt	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,17 +0,0 @@
+-package com.example.savegreen
+-
+-import org.junit.Test
+-
+-import org.junit.Assert.*
+-
+-/**
+- * Example local unit test, which will execute on the development machine (host).
+- *
+- * See [testing documentation](http://d.android.com/tools/testing).
+- */
+-class ExampleUnitTest {
+-    @Test
+-    fun addition_isCorrect() {
+-        assertEquals(4, 2 + 2)
+-    }
+-}
+\ No newline at end of file
+Index: GreenSaverAndroid/.idea/misc.xml
+===================================================================
+diff --git a/GreenSaverAndroid/.idea/misc.xml b/GreenSaverAndroid/.idea/misc.xml
+deleted file mode 100644
+--- a/GreenSaverAndroid/.idea/misc.xml	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,9 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+-    <output url="file://$PROJECT_DIR$/build/classes" />
+-  </component>
+-  <component name="ProjectType">
+-    <option name="id" value="Android" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: GreenSaverAndroid/settings.gradle
+===================================================================
+diff --git a/GreenSaverAndroid/settings.gradle b/GreenSaverAndroid/settings.gradle
+deleted file mode 100644
+--- a/GreenSaverAndroid/settings.gradle	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,10 +0,0 @@
+-dependencyResolutionManagement {
+-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+-    repositories {
+-        google()
+-        mavenCentral()
+-        jcenter() // Warning: this repository is going to shut down soon
+-    }
+-}
+-rootProject.name = "SaveGreen"
+-include ':app'
+Index: GreenSaverAndroid/app/.gitignore
+===================================================================
+diff --git a/GreenSaverAndroid/app/.gitignore b/GreenSaverAndroid/app/.gitignore
+deleted file mode 100644
+--- a/GreenSaverAndroid/app/.gitignore	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,1 +0,0 @@
+-/build
+\ No newline at end of file
+Index: GreenSaverAndroid/app/src/main/res/values/strings.xml
+===================================================================
+diff --git a/GreenSaverAndroid/app/src/main/res/values/strings.xml b/GreenSaverAndroid/app/src/main/res/values/strings.xml
+deleted file mode 100644
+--- a/GreenSaverAndroid/app/src/main/res/values/strings.xml	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,5 +0,0 @@
+-<resources>
+-    <string name="app_name">SaveGreen</string>
+-    <string name="tab_text_1">Tab 1</string>
+-    <string name="tab_text_2">Tab 2</string>
+-</resources>
+\ No newline at end of file
+Index: GreenSaverAndroid/app/src/main/res/layout/fragment_main.xml
+===================================================================
+diff --git a/GreenSaverAndroid/app/src/main/res/layout/fragment_main.xml b/GreenSaverAndroid/app/src/main/res/layout/fragment_main.xml
+deleted file mode 100644
+--- a/GreenSaverAndroid/app/src/main/res/layout/fragment_main.xml	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,23 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:app="http://schemas.android.com/apk/res-auto"
+-    xmlns:tools="http://schemas.android.com/tools"
+-    android:id="@+id/constraintLayout"
+-    android:layout_width="match_parent"
+-    android:layout_height="match_parent"
+-    tools:context=".ui.main.PlaceholderFragment">
+-
+-    <TextView
+-        android:id="@+id/section_label"
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:layout_marginStart="@dimen/activity_horizontal_margin"
+-        android:layout_marginTop="@dimen/activity_vertical_margin"
+-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+-        android:layout_marginBottom="@dimen/activity_vertical_margin"
+-        app:layout_constraintLeft_toLeftOf="parent"
+-        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
+-        tools:layout_constraintLeft_creator="1"
+-        tools:layout_constraintTop_creator="1" />
+-
+-</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: GreenSaverAndroid/app/proguard-rules.pro
+===================================================================
+diff --git a/GreenSaverAndroid/app/proguard-rules.pro b/GreenSaverAndroid/app/proguard-rules.pro
+deleted file mode 100644
+--- a/GreenSaverAndroid/app/proguard-rules.pro	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,21 +0,0 @@
+-# Add project specific ProGuard rules here.
+-# You can control the set of applied configuration files using the
+-# proguardFiles setting in build.gradle.
+-#
+-# For more details, see
+-#   http://developer.android.com/guide/developing/tools/proguard.html
+-
+-# If your project uses WebView with JS, uncomment the following
+-# and specify the fully qualified class name to the JavaScript interface
+-# class:
+-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+-#   public *;
+-#}
+-
+-# Uncomment this to preserve the line number information for
+-# debugging stack traces.
+-#-keepattributes SourceFile,LineNumberTable
+-
+-# If you keep the line number information, uncomment this to
+-# hide the original source file name.
+-#-renamesourcefileattribute SourceFile
+\ No newline at end of file
+Index: GreenSaverAndroid/app/src/main/res/values-land/dimens.xml
+===================================================================
+diff --git a/GreenSaverAndroid/app/src/main/res/values-land/dimens.xml b/GreenSaverAndroid/app/src/main/res/values-land/dimens.xml
+deleted file mode 100644
+--- a/GreenSaverAndroid/app/src/main/res/values-land/dimens.xml	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,3 +0,0 @@
+-<resources>
+-    <dimen name="fab_margin">48dp</dimen>
+-</resources>
+\ No newline at end of file
+Index: GreenSaverAndroid/app/src/main/res/values-w600dp/dimens.xml
+===================================================================
+diff --git a/GreenSaverAndroid/app/src/main/res/values-w600dp/dimens.xml b/GreenSaverAndroid/app/src/main/res/values-w600dp/dimens.xml
+deleted file mode 100644
+--- a/GreenSaverAndroid/app/src/main/res/values-w600dp/dimens.xml	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,3 +0,0 @@
+-<resources>
+-    <dimen name="fab_margin">48dp</dimen>
+-</resources>
+\ No newline at end of file
+Index: GreenSaverAndroid/.idea/codeStyles/Project.xml
+===================================================================
+diff --git a/GreenSaverAndroid/.idea/codeStyles/Project.xml b/GreenSaverAndroid/.idea/codeStyles/Project.xml
+deleted file mode 100644
+--- a/GreenSaverAndroid/.idea/codeStyles/Project.xml	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,123 +0,0 @@
+-<component name="ProjectCodeStyleConfiguration">
+-  <code_scheme name="Project" version="173">
+-    <JetCodeStyleSettings>
+-      <option name="CODE_STYLE_DEFAULTS" value="KOTLIN_OFFICIAL" />
+-    </JetCodeStyleSettings>
+-    <codeStyleSettings language="XML">
+-      <option name="FORCE_REARRANGE_MODE" value="1" />
+-      <indentOptions>
+-        <option name="CONTINUATION_INDENT_SIZE" value="4" />
+-      </indentOptions>
+-      <arrangement>
+-        <rules>
+-          <section>
+-            <rule>
+-              <match>
+-                <AND>
+-                  <NAME>xmlns:android</NAME>
+-                  <XML_ATTRIBUTE />
+-                  <XML_NAMESPACE>^$</XML_NAMESPACE>
+-                </AND>
+-              </match>
+-            </rule>
+-          </section>
+-          <section>
+-            <rule>
+-              <match>
+-                <AND>
+-                  <NAME>xmlns:.*</NAME>
+-                  <XML_ATTRIBUTE />
+-                  <XML_NAMESPACE>^$</XML_NAMESPACE>
+-                </AND>
+-              </match>
+-              <order>BY_NAME</order>
+-            </rule>
+-          </section>
+-          <section>
+-            <rule>
+-              <match>
+-                <AND>
+-                  <NAME>.*:id</NAME>
+-                  <XML_ATTRIBUTE />
+-                  <XML_NAMESPACE>http://schemas.android.com/apk/res/android</XML_NAMESPACE>
+-                </AND>
+-              </match>
+-            </rule>
+-          </section>
+-          <section>
+-            <rule>
+-              <match>
+-                <AND>
+-                  <NAME>.*:name</NAME>
+-                  <XML_ATTRIBUTE />
+-                  <XML_NAMESPACE>http://schemas.android.com/apk/res/android</XML_NAMESPACE>
+-                </AND>
+-              </match>
+-            </rule>
+-          </section>
+-          <section>
+-            <rule>
+-              <match>
+-                <AND>
+-                  <NAME>name</NAME>
+-                  <XML_ATTRIBUTE />
+-                  <XML_NAMESPACE>^$</XML_NAMESPACE>
+-                </AND>
+-              </match>
+-            </rule>
+-          </section>
+-          <section>
+-            <rule>
+-              <match>
+-                <AND>
+-                  <NAME>style</NAME>
+-                  <XML_ATTRIBUTE />
+-                  <XML_NAMESPACE>^$</XML_NAMESPACE>
+-                </AND>
+-              </match>
+-            </rule>
+-          </section>
+-          <section>
+-            <rule>
+-              <match>
+-                <AND>
+-                  <NAME>.*</NAME>
+-                  <XML_ATTRIBUTE />
+-                  <XML_NAMESPACE>^$</XML_NAMESPACE>
+-                </AND>
+-              </match>
+-              <order>BY_NAME</order>
+-            </rule>
+-          </section>
+-          <section>
+-            <rule>
+-              <match>
+-                <AND>
+-                  <NAME>.*</NAME>
+-                  <XML_ATTRIBUTE />
+-                  <XML_NAMESPACE>http://schemas.android.com/apk/res/android</XML_NAMESPACE>
+-                </AND>
+-              </match>
+-              <order>ANDROID_ATTRIBUTE_ORDER</order>
+-            </rule>
+-          </section>
+-          <section>
+-            <rule>
+-              <match>
+-                <AND>
+-                  <NAME>.*</NAME>
+-                  <XML_ATTRIBUTE />
+-                  <XML_NAMESPACE>.*</XML_NAMESPACE>
+-                </AND>
+-              </match>
+-              <order>BY_NAME</order>
+-            </rule>
+-          </section>
+-        </rules>
+-      </arrangement>
+-    </codeStyleSettings>
+-    <codeStyleSettings language="kotlin">
+-      <option name="CODE_STYLE_DEFAULTS" value="KOTLIN_OFFICIAL" />
+-    </codeStyleSettings>
+-  </code_scheme>
+-</component>
+\ No newline at end of file
+Index: GreenSaverAndroid/app/src/main/res/values-night/themes.xml
+===================================================================
+diff --git a/GreenSaverAndroid/app/src/main/res/values-night/themes.xml b/GreenSaverAndroid/app/src/main/res/values-night/themes.xml
+deleted file mode 100644
+--- a/GreenSaverAndroid/app/src/main/res/values-night/themes.xml	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
++++ /dev/null	(revision eb40b48d667119c28e79b2c9812c8ee83521c8e8)
+@@ -1,16 +0,0 @@
+-<resources xmlns:tools="http://schemas.android.com/tools">
+-    <!-- Base application theme. -->
+-    <style name="Theme.SaveGreen" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+-        <!-- Primary brand color. -->
+-        <item name="colorPrimary">@color/purple_200</item>
+-        <item name="colorPrimaryVariant">@color/purple_700</item>
+-        <item name="colorOnPrimary">@color/black</item>
+-        <!-- Secondary brand color. -->
+-        <item name="colorSecondary">@color/teal_200</item>
+-        <item name="colorSecondaryVariant">@color/teal_200</item>
+-        <item name="colorOnSecondary">@color/black</item>
+-        <!-- Status bar color. -->
+-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+-        <!-- Customize your theme here. -->
+-    </style>
+-</resources>
+\ No newline at end of file
+diff --git a/GreenSaverAndroid/.idea/.gitignore b/GreenSaverAndroid/.idea/.gitignore
+deleted file mode 100644

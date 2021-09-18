@@ -1,0 +1,69 @@
+<changelist name="Uncommitted_changes_before_rebase_[Default_Changelist]1" date="1631727241951" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Default_Changelist]1/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before rebase [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="recipe-app/src/main/resources/static/images/logo1.png" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="recipe-app/gradlew" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="recipe-app/src/main/resources/static/images/louis-hansel-restaurant-photographer-MlPD-AzZYMg-unsplash.jpg" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="recipe-app/src/main/resources/static/images/Grilled_Chicken.jpg" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="recipe-app/src/main/resources/static/images/logo2.png" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="recipe-app/gradlew.bat" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="recipe-app/src/main/resources/static/images/the-creative-exchange--kcALmA0WCE-unsplash.jpg" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="recipe-app/gradle/wrapper/gradle-wrapper.jar" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="recipe-app/src/main/resources/static/css/bootstrap.min.css.map" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="recipe-app/src/main/resources/static/js/bootstrap.bundle.min.js.map" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="recipe-app/src/main/resources/static/css/bootstrap.rtl.min.css.map" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="recipe-app/src/main/resources/static/images/sam-moqadam-wg551YMfeOc-unsplash.jpg" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="recipe-app/src/main/resources/static/images/sam-moqadam-i3A-se17VAg-unsplash.jpg" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+</changelist>
