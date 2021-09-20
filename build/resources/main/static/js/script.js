@@ -50,9 +50,9 @@ function displayShoppingList() {
         let expires = parsedStorage[item].expires;
         let newItem = document.createElement("P");
         newItem.setAttribute("name", "list_item")
-        newItem.innerHTML = '<label class="list-group-item"><input name="check" class="form-check-input me-2" type="checkbox">' + itemName + " " +
-          "-" + " expires: " + expires + '</label>';
-        list.appendChild(newItem);
+        newItem.innerHTML = '<label class="list-group-item"><input name="check" class="form-check-input me-2" type="checkbox" value="">' + itemName + " " +
+          "-" + " expires: " + '<span style="text-align: right">' + expires + '</span></label>';
+        document.getElementById('fridge').appendChild(newItem);
 
       }
 }
