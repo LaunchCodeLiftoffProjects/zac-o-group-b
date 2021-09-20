@@ -13,7 +13,8 @@ public class Recipe {
 
     @Id
     @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "recipe_seq")
-    private int recipe_id;
+    @Column(name = "recipe_id")
+    private int recipeId;
 
     //@OneToMany(mappedBy = "recipe")
     //@JoinColumn(name = "recipe_id",table = "recipe_ingredients")
@@ -62,8 +63,8 @@ public class Recipe {
         this.recipe_details = recipe_details;
     }
 
-    public int getRecipe_id() {
-        return recipe_id;
+    public int getRecipeId() {
+        return recipeId;
     }
 
     public String getRecipe_name() {
