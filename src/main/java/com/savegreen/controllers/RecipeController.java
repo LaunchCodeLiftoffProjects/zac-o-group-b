@@ -1,6 +1,6 @@
-package com.prismcortex.stayfreshfridge.controllers;
-import com.prismcortex.stayfreshfridge.data.RecipeRepository;
-import com.prismcortex.stayfreshfridge.models.Recipe;
+package com.savegreen.controllers;
+import com.savegreen.data.RecipeRepository;
+import com.savegreen.models.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

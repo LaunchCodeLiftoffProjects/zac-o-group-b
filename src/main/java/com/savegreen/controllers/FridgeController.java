@@ -1,7 +1,6 @@
-package com.prismcortex.stayfreshfridge.controllers;
+package com.savegreen.controllers;
 
-import com.prismcortex.stayfreshfridge.data.ShoppingListData;
-import com.prismcortex.stayfreshfridge.models.Fridge;
+import com.savegreen.models.Fridge;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

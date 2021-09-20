@@ -1,18 +1,6 @@
-package com.prismcortex.stayfreshfridge;
+package com.savegreen;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-
-import com.prismcortex.stayfreshfridge.data.ShoppingListData;
-import com.prismcortex.stayfreshfridge.models.GroceryItem;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 //@SpringBootTest
 //public class ShoppingListTests {

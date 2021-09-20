@@ -1,4 +1,4 @@
-package com.prismcortex.stayfreshfridge.models;
+package com.savegreen.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;

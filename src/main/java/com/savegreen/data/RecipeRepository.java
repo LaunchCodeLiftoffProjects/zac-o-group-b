@@ -1,6 +1,6 @@
-package com.prismcortex.stayfreshfridge.data;
+package com.savegreen.data;
 
-import com.prismcortex.stayfreshfridge.models.Recipe;
+import com.savegreen.models.Recipe;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

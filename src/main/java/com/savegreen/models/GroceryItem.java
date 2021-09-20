@@ -1,9 +1,8 @@
-package com.prismcortex.stayfreshfridge.models;
+package com.savegreen.models;
 
 import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Objects;
 
 @Entity
 public class GroceryItem extends AbstractEntity{

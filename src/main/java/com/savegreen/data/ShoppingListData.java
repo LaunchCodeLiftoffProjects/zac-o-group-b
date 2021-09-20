@@ -1,7 +1,6 @@
-package com.prismcortex.stayfreshfridge.data;
+package com.savegreen.data;
 
-import com.prismcortex.stayfreshfridge.models.GroceryItem;
-import org.apache.tomcat.jni.Local;
+import com.savegreen.models.GroceryItem;
 
 import java.util.*;
 

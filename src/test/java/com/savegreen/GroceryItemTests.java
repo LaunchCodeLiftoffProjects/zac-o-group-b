@@ -1,9 +1,4 @@
-package com.prismcortex.stayfreshfridge;
-
-import com.prismcortex.stayfreshfridge.models.GroceryItem;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+package com.savegreen;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

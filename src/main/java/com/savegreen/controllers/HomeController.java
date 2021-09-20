@@ -1,4 +1,4 @@
-package com.prismcortex.stayfreshfridge.controllers;
+package com.savegreen.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;

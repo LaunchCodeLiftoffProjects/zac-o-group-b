@@ -1,4 +1,4 @@
-package com.prismcortex.stayfreshfridge.models;
+package com.savegreen.models;
 
 import java.util.Collection;
 import java.util.HashMap;

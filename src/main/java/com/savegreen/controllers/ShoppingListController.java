@@ -1,9 +1,9 @@
-package com.prismcortex.stayfreshfridge.controllers;
+package com.savegreen.controllers;
 
-import com.prismcortex.stayfreshfridge.data.GroceryItemRepository;
-import com.prismcortex.stayfreshfridge.data.ShoppingListData;
-import com.prismcortex.stayfreshfridge.models.Fridge;
-import com.prismcortex.stayfreshfridge.models.GroceryItem;
+import com.savegreen.data.GroceryItemRepository;
+import com.savegreen.data.ShoppingListData;
+import com.savegreen.models.Fridge;
+import com.savegreen.models.GroceryItem;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
