@@ -34,7 +34,7 @@ public class RecipeController {
             model.addAttribute("recipes", recipe);
             return "recipe/view";
         } else {
-            return "redirect:../";
+            return "redirect: recipe/index";
         }
     }
 

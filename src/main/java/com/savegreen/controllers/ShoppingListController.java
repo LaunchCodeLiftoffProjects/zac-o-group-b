@@ -34,7 +34,7 @@ public class ShoppingListController {
             return "shoppinglist/index";
         }
         groceryItemRepository.save(newGroceryItem);
-        return "redirect: shoppinglist/index";
+        return "redirect:shoppinglist";
     }
     @RequestMapping("delete")
     @GetMapping("delete")

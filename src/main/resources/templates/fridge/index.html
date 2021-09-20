@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+<h1 class="display-3 text-center">Save Green</h1>
+<header th:replace="fragments :: header(page='shopping')"></header>
+<!--<div th:replace="fragments :: alert"></div>-->
+<div class="container-fluid">
+
+    <form action="fridge" method="post" style="max-width:600px;">
+        <div>
+            <h5 class="text-primary">What's in the Fridge</h5>
+        </div>
+        <div>
+
+            <th:block>
+            <table class="table table-primary table-striped" id="fridge-list">
+                <thead>
+                <tr>
+                    <th scope="col">Item</th><th scope="col">Use By</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr  th:each="groceryItem : ${fridgeItems}">
+                    <td th:text="${groceryItem.name}" name="name"></td>
+
+                    <td class="input-group">
+                        <th:block th:if="${groceryItem.expires.equals('')}">
+                            <input type="date" class="form-control" name="expires" th:value="${groceryItem.expires}">
+                            <button type="submit" name="itemId" th:value="${groceryItem.id}" class="btn btn-primary">Set Use By Date</button>
+                        </th:block>
+
+                        <th:block th:unless="${groceryItem.expires.equals('')}" th:text="${groceryItem.expires}">
+
+                        </th:block>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            </th:block>
+<!--            <ul>-->
+<!--                <th:block th:each="groceryItem : ${fridgeItems}" class="">-->
+<!--                    <li class="list-group-item">-->
+<!--                        <th:block th:text="${groceryItem.name}">-->
+
+<!--                        </th:block>-->
+<!--                        <th:block th:if="${groceryItem.expires.equals('')}">-->
+<!--                            <form>-->
+<!--                            <div class="form-group">-->
+<!--                                <label th:for="expires" class="text-dark">Expires: </label>-->
+<!--                                <input type="date" class="form-control" th:field="${groceryItem.expires}">-->
+<!--                            </div>-->
+<!--                            </form>-->
+<!--                            <th:block th:unless="${groceryItem.expires}">-->
+<!--                                <th:block th:text="${groceryItem.expires}">-->
+
+<!--                                </th:block>-->
+<!--                            </th:block>-->
+<!--                        </th:block>-->
+
+<!--                        </th:block>-->
+<!--                    </li>-->
+
+<!--                </th:block>-->
+<!--            </ul>-->
+        </div>
+    </form>
+    </div>
+</body>
+</html>
