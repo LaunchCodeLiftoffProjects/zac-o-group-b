@@ -1,4 +1,4 @@
-package org.launchcode.recipeapp.models;
+package com.savegreen.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

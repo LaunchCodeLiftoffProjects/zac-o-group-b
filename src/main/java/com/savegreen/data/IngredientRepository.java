@@ -1,6 +1,6 @@
-package org.launchcode.recipeapp.models.data;
+package com.savegreen.data;
 
-import org.launchcode.recipeapp.models.Ingredient;
+import com.savegreen.models.Ingredient;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

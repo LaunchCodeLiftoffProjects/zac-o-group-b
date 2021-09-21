@@ -14,7 +14,7 @@
     <div class="row">
         <th:block th:each="recipe : ${recipes}">
             <div  class="col-md-4">
-                <a class="text-decoration-none" th:href="@{'/recipe/view/' + ${recipe.recipe_id}}">
+                <a class="text-decoration-none" th:href="@{'/recipe/view/' + ${recipe.recipeId}}">
                     <h5  th:text="${recipe.recipe_name}"></h5>
                     <img th:src="${recipe.recipe_img_url}">
                 </a>
