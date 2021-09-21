@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.swing.text.html.Option;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -98,7 +99,8 @@ public class RecipeController {
     }
 
     @PostMapping("delete")
-    public String processDeleteRecipeForm(@RequestParam(required = true) int[] deleteRecipeId,Model model) {
+    public String processDeleteRecipeForm(@RequestParam(required = true) int[] deleteRecipeId, Model model) {
+
         for (int i=0; i<deleteRecipeId.length;i++){
             recipeRepository.deleteById(deleteRecipeId[i]);
             recipeIngredientRepository.deleteByRecipeid(deleteRecipeId[i]);
