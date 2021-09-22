@@ -6,13 +6,26 @@
 <!--<div th:replace="fragments :: alert"></div>-->
 <div class="container-fluid">
 
-    <form action="fridge" method="post" style="max-width:600px;">
+    <form action="fridge" method="post">
         <div>
-            <h5 class="text-primary">What's in the Fridge</h5>
+            <h5 class="text-primary text-center">What's in the Fridge</h5>
         </div>
+        <h6>Add Items to Fridge</h6>
+        <div class="input-group">
+
+            <label th:for="name" class="text-dark">Item Name</label>
+            <input class="form-control" th:field="${groceryItem.name}" />
+
+            <label th:for="expires" class="text-dark">Expires: </label>
+            <input type="date" class="form-control" th:field="${groceryItem.expires}">
+            <input type="submit" value="Add to Fridge" class="btn btn-primary btn-lg active"/>
+        </div>
+        <p th:errors="${groceryItem.name}" class="error text-danger"></p>
+        <br>
+
+    </form>
+
         <div>
-
-
             <table class="table table-primary table-striped" id="fridge-list">
                 <thead>
                 <tr>
@@ -21,52 +34,18 @@
                 </thead>
                 <tbody>
                 <tr th:each="groceryItem : ${fridgeItems}">
-                    <td class="input-group">
-                        <input type="text" name="fridgeName" th:value="${groceryItem.name}">
-                    </td>
-
-                    <td class="input-group">
-                        <div th:if="${groceryItem.expires == null}" class="input-group">
-                            <input type="date" class="form-control" name="useByDate" th:value="${groceryItem.expires}">
-                            <button type="submit" name="saveId" th:value="${groceryItem.id}" class="btn btn-primary">Set Use By Date</button>
-                            <button type="submit" name="deleteIds" th:value="${groceryItem.id}" class="btn btn-danger">Delete</button>
-                        </div>
-
-                        <div th:unless="${groceryItem.expires == null}" th:text="${groceryItem.expires}">
-
-                        </div>
-                    </td>
+                    <td name="name" th:text="${groceryItem.name}"></td>
+                    <td name="expires" th:text="${groceryItem.expires}"></td>
                 </tr>
                 </tbody>
             </table>
-
-<!--            <ul>-->
-<!--                <th:block th:each="groceryItem : ${fridgeItems}" class="">-->
-<!--                    <li class="list-group-item">-->
-<!--                        <th:block th:text="${groceryItem.name}">-->
-
-<!--                        </th:block>-->
-<!--                        <th:block th:if="${groceryItem.expires.equals('')}">-->
-<!--                            <form>-->
-<!--                            <div class="form-group">-->
-<!--                                <label th:for="expires" class="text-dark">Expires: </label>-->
-<!--                                <input type="date" class="form-control" th:field="${groceryItem.expires}">-->
-<!--                            </div>-->
-<!--                            </form>-->
-<!--                            <th:block th:unless="${groceryItem.expires}">-->
-<!--                                <th:block th:text="${groceryItem.expires}">-->
-
-<!--                                </th:block>-->
-<!--                            </th:block>-->
-<!--                        </th:block>-->
-
-<!--                        </th:block>-->
-<!--                    </li>-->
-
-<!--                </th:block>-->
-<!--            </ul>-->
         </div>
     </form>
+    <div class="container-fluid">
+        <a th:href="@{'/shoppinglist/move'}">
+        <button class="btn btn-primary btn-lg active">Move Items From Shopping List</button>
+        </a>
+    </div>
     </div>
 </body>
 </html>

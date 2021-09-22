@@ -1,5 +1,6 @@
 package com.savegreen.controllers;
 
+import com.savegreen.data.FridgeRepository;
 import com.savegreen.data.GroceryItemRepository;
 import com.savegreen.models.GroceryItem;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,22 +18,25 @@ public class FridgeController {
 
     @Autowired
     private GroceryItemRepository groceryItemRepository;
+    @Autowired
+    private FridgeRepository fridgeRepository;
 
     @GetMapping("")
     public String displayFridgeList(Model model) {
         model.addAttribute("title", "Fridge");
-        model.addAttribute("fridgeItems", groceryItemRepository.findAll());
+        model.addAttribute("fridgeItems", fridgeRepository.findAll());
+        model.addAttribute(new GroceryItem());
 
         return "fridge/index";
     }
 
     @PostMapping("")
-    public String setUseByDate(@ModelAttribute @Valid GroceryItem newGroceryItem, Errors errors,
-                               @RequestParam(required = false) String fridgeName, @RequestParam(required = false) String useByDate, Model model) {
-
-        newGroceryItem.setName(fridgeName);
-        newGroceryItem.setExpires(useByDate);
-        groceryItemRepository.save(newGroceryItem);
-        return "redirect:";
+    public String createFridgeItem(@ModelAttribute @Valid GroceryItem newFridgeItem, Errors errors,
+                                Model model) {
+        if(errors.hasErrors()){
+            return "fridge/index";
+        }
+        fridgeRepository.save(newFridgeItem);
+        return "redirect:fridge";
     }
 }

@@ -2,17 +2,20 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body>
-<header th:replace="fragments :: header"></header>
+<header th:replace="fragments :: header(page = 'shopping')"></header>
 
-<h1 class="display-3 text-center" >Shopping List</h1>
 <h3 class="text-center">Move To Fridge</h3>
 
-<form method="post" action="move">
-    <div class="container-fluid" th:if="${shoppingList.size()}">
+<form method="post" action="move" style="max-width:600px;">
+    <div class="container-fluid">
         <ul class="list-group">
             <th:block th:each="item : ${shoppingList}">
                 <li class="list-group-item">
-                    <input class="form-check-input me-1" type="checkbox" name="items" th:value="${item.id}" aria-label="..." th:text="${item}">
+                    <div class="input-group">
+                    <input class="form-check-input me-2" type="checkbox" name="items" th:value="${item.id}" aria-label="..." th:text="${item.name}">
+                        <input type="date" class="form-control" name="expires" th:value="${item.expires}">
+                        <button type="submit" class="btn btn-primary">Set Use By Date</button>
+                    </div>
                 </li>
             </th:block>
         </ul>
@@ -21,12 +24,15 @@
         </div><br>
         <div class="d-grid gap-2 col-6 mx-auto">
             <a href="/shoppinglist" class="btn btn-info">Back To List</a>
+        </div><br>
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <a href="/fridge" class="btn btn-info">Open Fridge</a>
         </div>
 
     </div>
 </form>
-<div class="d-grid gap-2 col-6 mx-auto" th:unless="${shoppingList.size()}">
-    <a href="/shoppinglist" class="btn btn-info">Back To List</a>
-</div>
+<!--<div class="d-grid gap-2 col-6 mx-auto" th:unless="${shoppingList.size()}">-->
+<!--    <a href="/shoppinglist" class="btn btn-info">Back To List</a>-->
+<!--</div>-->
 </body>
 </html>
