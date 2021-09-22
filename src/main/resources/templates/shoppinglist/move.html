@@ -4,31 +4,26 @@
 <body>
 <header th:replace="fragments :: header(page = 'shopping')"></header>
 
-<h3 class="text-center">Move To Fridge</h3>
-
-<form method="post" action="move" style="max-width:600px;">
+<h3 class="text-center border-dark border-bottom border-3 py-2">Set Use By Date and Move To Fridge</h3>
+<div class="container-fluid input-group">
+    <a th:href="@{'/shoppinglist'}"><h5 class="text-primary mx-2">Back To List</h5></a>
+    <h5 class="text-primary mx-2">  |  |  </h5>
+    <a th:href="@{'/fridge'}"><h5 class="text-primary mx-2">Open Fridge</h5></a>
+</div>
+<form method="post" action="move" style="max-width:600px">
     <div class="container-fluid">
         <ul class="list-group">
             <th:block th:each="item : ${shoppingList}">
                 <li class="list-group-item">
                     <div class="input-group">
-                    <input class="form-check-input me-2" type="checkbox" name="items" th:value="${item.id}" aria-label="..." th:text="${item.name}">
-                        <input type="date" class="form-control" name="expires" th:value="${item.expires}">
-                        <button type="submit" class="btn btn-primary">Set Use By Date</button>
+                        <h5 th:text="${item.name}" class="pt-2 mx-2"></h5>
+                    <label th:for="expires" class="text-dark"></label>
+                    <input type="date" class="form-control" name="expires" th:value="${item.expires}">
+                    <button type="submit" class="btn btn-primary" name="items" th:value="${item.id}">Set Use By Date</button>
                     </div>
                 </li>
             </th:block>
         </ul>
-        <div class="d-grid gap-2 col-6 mx-auto">
-            <button class="btn btn-info" type="submit">Move Checked To Fridge</button>
-        </div><br>
-        <div class="d-grid gap-2 col-6 mx-auto">
-            <a href="/shoppinglist" class="btn btn-info">Back To List</a>
-        </div><br>
-        <div class="d-grid gap-2 col-6 mx-auto">
-            <a href="/fridge" class="btn btn-info">Open Fridge</a>
-        </div>
-
     </div>
 </form>
 <!--<div class="d-grid gap-2 col-6 mx-auto" th:unless="${shoppingList.size()}">-->

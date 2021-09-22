@@ -11,12 +11,12 @@
             <h5 class="text-primary text-center">What's in the Fridge</h5>
         </div>
         <h6>Add Items to Fridge</h6>
-        <div class="input-group">
+        <div class="input-group border border-dark border-5">
 
-            <label th:for="name" class="text-dark">Item Name</label>
-            <input class="form-control" th:field="${groceryItem.name}" />
-
-            <label th:for="expires" class="text-dark">Expires: </label>
+            <label th:for="name" class="text-dark"></label>
+            <input class="form-control" th:field="${groceryItem.name}" placeholder="Item Name" value=""/>
+            <h5 class="pt-2 mx-2">Expires: </h5>
+            <label th:for="expires" class="text-dark"></label>
             <input type="date" class="form-control" th:field="${groceryItem.expires}">
             <input type="submit" value="Add to Fridge" class="btn btn-primary btn-lg active"/>
         </div>
