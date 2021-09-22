@@ -141,21 +141,21 @@
                 </a>
             </li>
             <li>
-                <a href="fridge" th:if="${page == 'fridge'}" class="nav-link active">
+                <a th:href="@{/fridge}" th:if="${page == 'fridge'}" class="nav-link active">
                     <svg class="bi me-2" width="16" height="16"><use xlink:href="#fridge"/></svg>
                     Fridge
                 </a>
-                <a href="fridge" th:unless="${page == 'fridge'}" class="nav-link text-white">
+                <a th:href="@{/fridge}" th:unless="${page == 'fridge'}" class="nav-link text-white">
                     <svg class="bi me-2" width="16" height="16"><use xlink:href="#fridge"/></svg>
                     Fridge
                 </a>
             </li>
             <li>
-                <a href="shoppinglist" th:if="${page == 'shopping'}" class="nav-link active">
+                <a th:href="@{/shoppinglist}" th:if="${page == 'shopping'}" class="nav-link active">
                     <svg class="bi me-2" width="16" height="16"><use xlink:href="#shoppinglist"/></svg>
                     Shopping List
                 </a>
-                <a href="shoppinglist" th:unless="${page == 'shopping'}" class="nav-link text-white">
+                <a th:href="@{/shoppinglist}" th:unless="${page == 'shopping'}" class="nav-link text-white">
                     <svg class="bi me-2" width="16" height="16"><use xlink:href="#shoppinglist"/></svg>
                     Shopping List
                 </a>
