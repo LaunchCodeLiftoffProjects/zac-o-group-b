@@ -6,12 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @RequestMapping("fridge")
 @Controller
@@ -29,12 +27,12 @@ public class FridgeController {
     }
 
     @PostMapping("")
-    public String setUseByDate(@ModelAttribute @Valid GroceryItem newGroceryItem, Errors errors, Model model) {
-        if (errors.hasErrors()) {
-            return "fridge/index";
-        }
+    public String setUseByDate(@ModelAttribute @Valid GroceryItem newGroceryItem, Errors errors,
+                               @RequestParam(required = false) String fridgeName, @RequestParam(required = false) String useByDate, Model model) {
 
+        newGroceryItem.setName(fridgeName);
+        newGroceryItem.setExpires(useByDate);
         groceryItemRepository.save(newGroceryItem);
-        return "redirect: ";
+        return "redirect:";
     }
 }

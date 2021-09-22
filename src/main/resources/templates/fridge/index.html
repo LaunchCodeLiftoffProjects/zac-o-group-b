@@ -12,7 +12,7 @@
         </div>
         <div>
 
-            <th:block>
+
             <table class="table table-primary table-striped" id="fridge-list">
                 <thead>
                 <tr>
@@ -20,23 +20,26 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr  th:each="groceryItem : ${fridgeItems}">
-                    <td th:text="${groceryItem.name}" name="name"></td>
+                <tr th:each="groceryItem : ${fridgeItems}">
+                    <td class="input-group">
+                        <input type="text" name="fridgeName" th:value="${groceryItem.name}">
+                    </td>
 
                     <td class="input-group">
-                        <th:block th:if="${groceryItem.expires.equals('')}">
-                            <input type="date" class="form-control" name="expires" th:value="${groceryItem.expires}">
-                            <button type="submit" name="itemId" th:value="${groceryItem.id}" class="btn btn-primary">Set Use By Date</button>
-                        </th:block>
+                        <div th:if="${groceryItem.expires == null}" class="input-group">
+                            <input type="date" class="form-control" name="useByDate" th:value="${groceryItem.expires}">
+                            <button type="submit" name="saveId" th:value="${groceryItem.id}" class="btn btn-primary">Set Use By Date</button>
+                            <button type="submit" name="deleteIds" th:value="${groceryItem.id}" class="btn btn-danger">Delete</button>
+                        </div>
 
-                        <th:block th:unless="${groceryItem.expires.equals('')}" th:text="${groceryItem.expires}">
+                        <div th:unless="${groceryItem.expires == null}" th:text="${groceryItem.expires}">
 
-                        </th:block>
+                        </div>
                     </td>
                 </tr>
                 </tbody>
             </table>
-            </th:block>
+
 <!--            <ul>-->
 <!--                <th:block th:each="groceryItem : ${fridgeItems}" class="">-->
 <!--                    <li class="list-group-item">-->
