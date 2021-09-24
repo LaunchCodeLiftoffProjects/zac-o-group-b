@@ -42,24 +42,24 @@ public class ShoppingListController {
         return "redirect:shoppinglist";
     }
 
-//    @RequestMapping("delete")
-//    @GetMapping("delete")
-//    public String displayDeleteList(Model model) {
-//        model.addAttribute("title", "Delete Item");
-//        model.addAttribute("shoppingList", ShoppingListData.getShoppingList());
-//        return "savegreen/shoppinglist/delete";
-//    }
-//
-//    @PostMapping("delete")
-//    public String deleteItems(@RequestParam(required = false) int[] itemIds) {
-//        if(itemIds != null) {
-//            for(int id : itemIds) {
-//                ShoppingListData.remove(id);
-//            }
-//        }
-//
-//        return "redirect:delete";
-//    }
+    @RequestMapping("delete")
+    @GetMapping("delete")
+    public String displayDeleteList(Model model) {
+        model.addAttribute("title", "Delete Item");
+        model.addAttribute("shoppingList", groceryItemRepository.findAll());
+        return "shoppinglist/delete";
+    }
+
+    @PostMapping("delete")
+    public String deleteItems(@RequestParam(required = false) int[] itemIds) {
+        if(itemIds != null) {
+            for(int id : itemIds) {
+                groceryItemRepository.deleteById(id);
+            }
+        }
+
+        return "redirect:delete";
+    }
 
     @RequestMapping("move")
     @GetMapping
@@ -80,6 +80,7 @@ public class ShoppingListController {
                     fridgeItem.setName(fridgeItem.getName());
                     fridgeItem.setExpires(expires);
                     fridgeRepository.save(fridgeItem);
+                    groceryItemRepository.delete(fridgeItem);
                 }
 
             }

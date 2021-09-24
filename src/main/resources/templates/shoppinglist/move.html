@@ -5,12 +5,12 @@
 <header th:replace="fragments :: header(page = 'shopping')"></header>
 
 <h3 class="text-center border-dark border-bottom border-3 py-2">Set Use By Date and Move To Fridge</h3>
-<div class="container-fluid input-group">
-    <a th:href="@{'/shoppinglist'}"><h5 class="text-primary mx-2">Back To List</h5></a>
-    <h5 class="text-primary mx-2">  |  |  </h5>
-    <a th:href="@{'/fridge'}"><h5 class="text-primary mx-2">Open Fridge</h5></a>
+<div class="container-fluid list-group list-group-horizontal" >
+    <h5 class="list-group-item list-group-item-primary">Move Items From Shopping List</h5>
+    <a th:href="@{'/shoppinglist'}"><h5 class="list-group-item list-group-item-primary">Add Items</h5></a>
+    <a th:href="@{'/shoppinglist/delete'}"><h5 class="list-group-item list-group-item-primary">Delete Items</h5></a>
 </div>
-<form method="post" action="move" style="max-width:600px">
+<form method="post" action="move" style="max-width:800px">
     <div class="container-fluid">
         <ul class="list-group">
             <th:block th:each="item : ${shoppingList}">

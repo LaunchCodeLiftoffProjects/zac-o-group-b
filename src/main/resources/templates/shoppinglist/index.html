@@ -7,11 +7,13 @@
 <!--<div th:replace="fragments :: alert"></div>-->
 <div class="container-fluid">
 
-    <form action="shoppinglist" method="post" style="max-width:600px;">
-        <div class="container-fluid input-group">
-            <h5 class="text-primary">Add Item To Shopping List |  |  </h5>
-            <a th:href="@{'/shoppinglist/move'}"><h5 class="text-primary mx-2">Move Items to Fridge</h5></a>
 
+
+    <form action="shoppinglist" method="post" style="max-width:800px;">
+        <div class="container-fluid list-group list-group-horizontal" >
+            <h5 class="list-group-item list-group-item-primary">Add Item To Shopping List</h5>
+            <a th:href="@{'/shoppinglist/move'}"><h5 class="list-group-item list-group-item-primary">Move Items to Fridge</h5></a>
+            <a th:href="@{'/shoppinglist/delete'}"><h5 class="list-group-item list-group-item-primary">Delete Items</h5></a>
         </div>
 
         <div class="form-group input-group">

@@ -5,12 +5,14 @@
 <header th:replace="fragments :: header(page='fridge')"></header>
 <!--<div th:replace="fragments :: alert"></div>-->
 <div class="container-fluid">
+    <div class="container-fluid list-group list-group-horizontal" >
+        <h5 class="list-group-item list-group-item-primary">What's in the Fridge</h5>
+        <a th:href="@{'/shoppinglist/move'}"><h5 class="list-group-item list-group-item-primary">Move Items From Shopping List</h5></a>
+        <a th:href="@{'/shoppinglist/delete'}"><h5 class="list-group-item list-group-item-primary">Delete Items</h5></a>
+    </div>
 
-    <form action="fridge" method="post">
-        <div>
-            <h5 class="text-primary text-center">What's in the Fridge</h5>
-        </div>
-        <h6>Add Items to Fridge</h6>
+    <form action="fridge" method="post" style="max-width:800px">
+        <h6>Add Item to Fridge</h6>
         <div class="input-group border border-dark border-5">
 
             <label th:for="name" class="text-dark"></label>
