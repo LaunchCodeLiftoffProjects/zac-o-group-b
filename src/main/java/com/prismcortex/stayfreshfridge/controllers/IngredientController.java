@@ -1,6 +1,7 @@
-package org.launchcode.recipeapp.controllers;
-import org.launchcode.recipeapp.models.Ingredient;
-import org.launchcode.recipeapp.models.data.IngredientRepository;
+package com.savegreen.controllers;
+import com.savegreen.data.IngredientRepository;
+import com.savegreen.models.Ingredient;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,7 +9,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("ingredients")

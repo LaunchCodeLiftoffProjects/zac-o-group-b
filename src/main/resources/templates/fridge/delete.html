@@ -9,12 +9,12 @@
 <form method="post" action="delete">
     <div class="container-fluid list-group list-group-horizontal" >
         <h5 class="list-group-item list-group-item-primary">Delete Items</h5>
-        <a th:href="@{'/shoppinglist/move'}"><h5 class="list-group-item list-group-item-primary">Move Items to Fridge</h5></a>
-        <a th:href="@{'/shoppinglist'}"><h5 class="list-group-item list-group-item-primary">Back To List</h5></a>
+        <a th:href="@{'/shoppinglist'}"><h5 class="list-group-item list-group-item-primary">Back to Shopping List</h5></a>
+        <a th:href="@{'/fridge'}"><h5 class="list-group-item list-group-item-primary">Back To Fridge</h5></a>
     </div>
-    <div class="container-fluid" th:if="${shoppingList.size()}">
+    <div class="container-fluid" th:if="${fridgeList.size()}">
         <ul class="list-group">
-            <th:block th:each="item : ${shoppingList}">
+            <th:block th:each="item : ${fridgeList}">
                 <li class="list-group-item">
                     <input class="form-check-input me-1" type="checkbox" name="itemIds" th:value="${item.id}" aria-label="..." th:text="${item.name}">
                 </li>

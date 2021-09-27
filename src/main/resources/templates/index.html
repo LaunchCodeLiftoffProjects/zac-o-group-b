@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+  <head th:replace="fragments :: head">
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <meta name="viewport" content="width=device-width">
+    <script src="https://kit.fontawesome.com/76c1c7dfe5.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+  <header th:replace="fragments :: header(page='home')"></header>
+    <div>
+      <h1>Grocery List</h1>
+      <input type="text" id="userInput" placeholder="To Buy" />
+      <span class="addBtn" id="add_button">Add</span>
+    </div>
+      <ul id ="myUl">
+      <i class=”far fa-trash-alt”></i>
+      </ul>
+    
+    <script src="js/script.js"></script>
+  </body>
+</html>
