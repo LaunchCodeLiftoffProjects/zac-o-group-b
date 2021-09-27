@@ -72,13 +72,20 @@ class Grocery_List_Class {
   }
 }
 
-
 ////------MAIN PROGRAM-------////
 
 const listSection = document.querySelector("#myUl");
 groceryList = new Grocery_List_Class(listSection);
 
 
+//input on enter 
+var el = document.getElementById("userInput");
+  el.addEventListener("keyup", function(event) {
+    if (event.key === "Enter") {
+        groceryList.add()
+    }
+  })
+//input on add button 
 document.querySelector(".addBtn").addEventListener("click", function () {
   groceryList.add()
 })
