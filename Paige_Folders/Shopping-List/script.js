@@ -44,6 +44,8 @@ class Grocery_List_Class {
     groceryObjectList.forEach((object_item) => {
       const liElement = document.createElement("li");
       const delBtn = document.createElement("i"); 
+      const emptyCheck = document.createElement("e")
+      const activeCheck = document.createElement("a")
 
       liElement.innerText = object_item.groceryText;
       liElement.setAttribute("data-id", object_item.id);
@@ -51,10 +53,18 @@ class Grocery_List_Class {
       delBtn.setAttribute("data-id", object_item.id);
       delBtn.classList.add("far", "fa-trash-alt");
 
+      emptyCheck.setAttribute("data-id", object_item.id);
+      emptyCheck.classList.add("far", "fa-square");
+
+      activeCheck.setAttribute("date-id", object_item.id);
+      activeCheck.classList.add("far", "fa-check-square");
+
       liElement.appendChild(delBtn);
+      liElement.appendChild(emptyCheck);
+      liElement.appendChild(activeCheck);
 
       delBtn.addEventListener("click", function(e) {
-        const deleteId = e.target.getAttribute("date-id");
+        const deleteId = e.target.getAttribute("data-id");
         groceryList.deleteElement(deleteId);
         
       })

@@ -40,15 +40,24 @@ ul li:hover {
   background: #ddd;
 }
 
+ul.li:before{
+  content: "\f0c8";
+  color:rgb(0, 0, 0)
+}
+
+/*creates checkmark and strikethrough, called on click in js*/
+
 ul li.checked {
   background: #888;
   color: #fff;
   text-decoration: line-through;
 }
 
-/*creates checkmark*/
-ul li.checked::before {
-  content: "";
+ul li.checked:before {
+  content: "\f14a";
+  color:rgb(0, 0, 0)
+
+  /* content: "";
   position: absolute;
   border-color: #fff;
   border-style: solid;
@@ -57,8 +66,25 @@ ul li.checked::before {
   left: 16px;
   transform: rotate(45deg);
   height: 15px;
-  width: 7px; 
+  width: 7px;  */
 }
+
+ul li.checked:hover{
+  content: "\f14a";
+  color:rgb(116, 116, 116)
+}
+
+
+/* .fa-square {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 12px 16px 12px 16px;
+}
+
+.fa-square:hover{
+  background: ".fa-check-square";
+} */
 
 /*styles trashcan icon*/
 .fa-trash-alt {
@@ -71,11 +97,4 @@ ul li.checked::before {
 .fa-trash-alt:hover {
   background-color: rgb(163, 97, 97);
   color: white;
-}
-
-.fa-square {
-  position: absolute;
-  left: 0;
-  top: 0;
-  padding: 12px 16px 12px 16px;
 }
