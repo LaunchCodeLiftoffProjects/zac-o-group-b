@@ -8,21 +8,21 @@
     <div class="container-fluid list-group list-group-horizontal" >
         <h5 class="list-group-item list-group-item-primary">What's in the Fridge</h5>
         <a th:href="@{'/shoppinglist/move'}"><h5 class="list-group-item list-group-item-primary">Move Items From Shopping List</h5></a>
-        <a th:href="@{'/shoppinglist/delete'}"><h5 class="list-group-item list-group-item-primary">Delete Items</h5></a>
+        <a th:href="@{'/fridge/delete'}"><h5 class="list-group-item list-group-item-primary">Delete Items</h5></a>
     </div>
 
     <form action="fridge" method="post" style="max-width:800px">
         <h6>Add Item to Fridge</h6>
-        <div class="input-group border border-dark border-5">
+        <div class="input-group border-dark border-5 border-bottom">
 
             <label th:for="name" class="text-dark"></label>
-            <input class="form-control" th:field="${groceryItem.name}" placeholder="Item Name" value=""/>
+            <input class="form-control" th:field="${fridgeItem.name}" placeholder="Item Name" value=""/>
             <h5 class="pt-2 mx-2">Expires: </h5>
             <label th:for="expires" class="text-dark"></label>
-            <input type="date" class="form-control" th:field="${groceryItem.expires}">
+            <input type="date" class="form-control" th:field="${fridgeItem.expires}">
             <input type="submit" value="Add to Fridge" class="btn btn-primary btn-lg active"/>
         </div>
-        <p th:errors="${groceryItem.name}" class="error text-danger"></p>
+        <p th:errors="${fridgeItem.name}" class="error text-danger"></p>
         <br>
 
     </form>

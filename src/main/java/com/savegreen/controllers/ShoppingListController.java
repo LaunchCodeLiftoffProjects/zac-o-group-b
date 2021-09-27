@@ -4,6 +4,7 @@ import com.savegreen.data.FridgeRepository;
 import com.savegreen.data.GroceryItemRepository;
 import com.savegreen.data.ShoppingListData;
 import com.savegreen.models.Fridge;
+import com.savegreen.models.FridgeItem;
 import com.savegreen.models.GroceryItem;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,26 +67,24 @@ public class ShoppingListController {
     public String displayMoveToFridge(Model model) {
         model.addAttribute("title", "Move To Fridge");
         model.addAttribute("shoppingList", groceryItemRepository.findAll());
+        model.addAttribute(new FridgeItem());
         return "shoppinglist/move";
     }
 
     @PostMapping("move")
-    public String moveToFridge(@RequestParam(required = false) int[] items, @RequestParam String expires, Model model) {
+    public String moveToFridge(@ModelAttribute @Valid FridgeItem newFridgeItem,
+                               @RequestParam(required = false) int itemId) {
 
-        if(items != null) {
-            for(int item : items) {
-                Optional optFridgeItem = groceryItemRepository.findById(item);
-                if (optFridgeItem.isPresent()) {
-                    GroceryItem fridgeItem = (GroceryItem) optFridgeItem.get();
-                    fridgeItem.setName(fridgeItem.getName());
-                    fridgeItem.setExpires(expires);
-                    fridgeRepository.save(fridgeItem);
-                    groceryItemRepository.delete(fridgeItem);
-                }
+        fridgeRepository.save(newFridgeItem);
+        groceryItemRepository.deleteById(itemId);
 
-            }
-
-        }
+//        Optional optMoveItem = groceryItemRepository.findById(item);
+//        if (optMoveItem.isPresent()) {
+//            GroceryItem fridgeItem = (GroceryItem) optMoveItem.get();
+//            FridgeItem newFridgeItem = new FridgeItem(moveItem.getName(), expires);
+//            fridgeRepository.save(newFridgeItem);
+//            groceryItemRepository.deleteById(item);
+//        }
         return "redirect:move";
     }
 

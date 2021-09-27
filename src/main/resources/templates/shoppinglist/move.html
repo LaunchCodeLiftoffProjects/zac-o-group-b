@@ -16,10 +16,12 @@
             <th:block th:each="item : ${shoppingList}">
                 <li class="list-group-item">
                     <div class="input-group">
-                        <h5 th:text="${item.name}" class="pt-2 mx-2"></h5>
+                        <th:block th:field="${fridgeItem.name}">
+                        <input type="text" th:name="name" th:value="${item.name}" class="form-control pt-2 mx-2">
+                        </th:block>
                     <label th:for="expires" class="text-dark"></label>
-                    <input type="date" class="form-control" name="expires" th:value="${item.expires}">
-                    <button type="submit" class="btn btn-primary" name="items" th:value="${item.id}">Set Use By Date</button>
+                    <input type="date" class="form-control" name="expires" th:field="${fridgeItem.expires}">
+                    <button type="submit" class="btn btn-primary" name="itemId" th:value="${item.id}">Set Use By Date</button>
                     </div>
                 </li>
             </th:block>

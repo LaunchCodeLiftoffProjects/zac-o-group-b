@@ -5,21 +5,23 @@
 <header th:replace="fragments :: header(page = 'shopping')"></header>
 
 <h3 class="text-center border-dark border-bottom border-3 py-2">Set Use By Date and Move To Fridge</h3>
-<div class="container-fluid input-group">
-    <a th:href="@{'/shoppinglist'}"><h5 class="text-primary mx-2">Back To List</h5></a>
-    <h5 class="text-primary mx-2">  |  |  </h5>
-    <a th:href="@{'/fridge'}"><h5 class="text-primary mx-2">Open Fridge</h5></a>
+<div class="container-fluid list-group list-group-horizontal" >
+    <h5 class="list-group-item list-group-item-primary">Move Items From Shopping List</h5>
+    <a th:href="@{'/shoppinglist'}"><h5 class="list-group-item list-group-item-primary">Add Items</h5></a>
+    <a th:href="@{'/shoppinglist/delete'}"><h5 class="list-group-item list-group-item-primary">Delete Items</h5></a>
 </div>
-<form method="post" action="move" style="max-width:600px">
+<form method="post" action="move" style="max-width:800px">
     <div class="container-fluid">
         <ul class="list-group">
             <th:block th:each="item : ${shoppingList}">
                 <li class="list-group-item">
                     <div class="input-group">
-                        <h5 th:text="${item.name}" class="pt-2 mx-2"></h5>
+                        <th:block th:field="${fridgeItem.name}">
+                        <input type="text" th:name="name" th:value="${item.name}" class="form-control pt-2 mx-2">
+                        </th:block>
                     <label th:for="expires" class="text-dark"></label>
-                    <input type="date" class="form-control" name="expires" th:value="${item.expires}">
-                    <button type="submit" class="btn btn-primary" name="items" th:value="${item.id}">Set Use By Date</button>
+                    <input type="date" class="form-control" name="expires" th:field="${fridgeItem.expires}">
+                    <button type="submit" class="btn btn-primary" name="itemId" th:value="${item.id}">Set Use By Date</button>
                     </div>
                 </li>
             </th:block>
