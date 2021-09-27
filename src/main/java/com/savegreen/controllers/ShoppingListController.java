@@ -2,8 +2,6 @@ package com.savegreen.controllers;
 
 import com.savegreen.data.FridgeRepository;
 import com.savegreen.data.GroceryItemRepository;
-import com.savegreen.data.ShoppingListData;
-import com.savegreen.models.Fridge;
 import com.savegreen.models.FridgeItem;
 import com.savegreen.models.GroceryItem;
 
@@ -14,7 +12,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @RequestMapping("shoppinglist")
 @Controller

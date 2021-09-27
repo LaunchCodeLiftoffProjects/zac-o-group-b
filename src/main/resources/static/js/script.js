@@ -20,7 +20,7 @@ class Grocery_List_Class {
       document.querySelector("#userInput").value = '';
     }
   }
-
+//isDone is returning undefined 
   done_undone(x) {
     const selectedGroceryIndex = 
     groceryObjectList.findIndex((item)=> item.id == x);
@@ -37,11 +37,15 @@ class Grocery_List_Class {
   }
 
   display() {
+    //need to add display of check boxes, then uncomment icons in HTML 
+    //algorythm refreshes each time with new input, therefore needs to be cleared 
     this.ulElement.innerHTML = "";
 
     groceryObjectList.forEach((object_item) => {
       const liElement = document.createElement("li");
       const delBtn = document.createElement("i"); 
+      const emptyCheck = document.createElement("e")
+      const activeCheck = document.createElement("a")
 
       liElement.innerText = object_item.groceryText;
       liElement.setAttribute("data-id", object_item.id);
@@ -49,10 +53,18 @@ class Grocery_List_Class {
       delBtn.setAttribute("data-id", object_item.id);
       delBtn.classList.add("far", "fa-trash-alt");
 
+      emptyCheck.setAttribute("data-id", object_item.id);
+      emptyCheck.classList.add("far", "fa-square");
+
+      activeCheck.setAttribute("date-id", object_item.id);
+      activeCheck.classList.add("far", "fa-check-square");
+
       liElement.appendChild(delBtn);
+      liElement.appendChild(emptyCheck);
+      liElement.appendChild(activeCheck);
 
       delBtn.addEventListener("click", function(e) {
-        const deleteId = e.target.getAttribute("date-id");
+        const deleteId = e.target.getAttribute("data-id");
         groceryList.deleteElement(deleteId);
         
       })
@@ -72,13 +84,20 @@ class Grocery_List_Class {
   }
 }
 
-
 ////------MAIN PROGRAM-------////
 
 const listSection = document.querySelector("#myUl");
 groceryList = new Grocery_List_Class(listSection);
 
 
+//input on enter 
+var el = document.getElementById("userInput");
+  el.addEventListener("keyup", function(event) {
+    if (event.key === "Enter") {
+        groceryList.add()
+    }
+  })
+//input on add button 
 document.querySelector(".addBtn").addEventListener("click", function () {
   groceryList.add()
 })
