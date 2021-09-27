@@ -20,7 +20,7 @@ class Grocery_List_Class {
       document.querySelector("#userInput").value = '';
     }
   }
-
+//isDone is returning undefined 
   done_undone(x) {
     const selectedGroceryIndex = 
     groceryObjectList.findIndex((item)=> item.id == x);
@@ -37,6 +37,8 @@ class Grocery_List_Class {
   }
 
   display() {
+    //need to add display of check boxes, then uncomment icons in HTML 
+    //algorythm refreshes each time with new input, therefore needs to be cleared 
     this.ulElement.innerHTML = "";
 
     groceryObjectList.forEach((object_item) => {

@@ -6,9 +6,9 @@ To do and notes to self (Paige Kilcullen):
 -"is done" strikethrough not working, go through CSS and JS and check how items are being called
 
 -Display function needs to be altered and checked for syntax errors to:
->include checkmark box
+>include empty checkmark box on left, change to gray checked box on hover, then change to black checked box once selected along with strikethrough
 call strikethrough properly
-~~trashcan icon should be turning red on hover, it is not.~~
+~~trashcan icon should be turning red on hover, it is not.~~(spelling error)
 
 other errors:
 
