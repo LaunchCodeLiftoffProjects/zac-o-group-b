@@ -8,14 +8,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+//@SecondaryTable(name="recipe_ingredients",pkJoinColumns = @PrimaryKeyJoinColumn(name = "recipe_id")})
 public class Recipe {
 
     @Id
-    @GeneratedValue
-    private int recipe_id;
+    @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "recipe_seq")
+    @Column(name = "recipe_id")
+    private int recipeId;
+
+    //@OneToMany(mappedBy = "recipe")
+    //@JoinColumn(name = "recipe_id",table = "recipe_ingredients")
 
 //    @OneToMany(mappedBy = "recipe")
-//    @JoinColumn(name = "recipe_id",table = "recipe_ingredients")
+//    private final List<RecipeIngredient> recipeIngredients = new ArrayList<>();
+//
+//    public List<RecipeIngredient> getRecipeIngredients() {
+//        return recipeIngredients;
+//    }
 
     @NotBlank(message = "Recipe Name is required")
     @Size(max = 250, message = "Recipe Name is too long!")
@@ -54,8 +63,8 @@ public class Recipe {
         this.recipe_details = recipe_details;
     }
 
-    public int getRecipe_id() {
-        return recipe_id;
+    public int getRecipeId() {
+        return recipeId;
     }
 
     public String getRecipe_name() {

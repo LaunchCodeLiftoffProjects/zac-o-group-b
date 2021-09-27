@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+<h1 class="display-3 text-center">Stay Fresh Fridge</h1>
+<header th:replace="fragments :: header(page='recipe')"></header>
+<div th:replace="fragments :: alert"></div>
+<div class="container-fluid">
+    <br>
+    <div>
+        <a href="/recipe/add" class="btn btn-primary btn-lg active" role="button">Add New Recipe</a>
+        <a href="/ingredients/add" class="btn btn-primary btn-lg active" role="button">Add New Ingredients</a>
+    </div>
+    <br>
+    <div class="row">
+        <th:block th:each="ingredient : ${ingredients}">
+            <div  class="col-md-4">
+                <h5  th:text="${ingredient.ingredient_id}"></h5> - <h5  th:text="${ingredient.ingredient_name}"></h5>
+                <p>&nbsp;</p>
+            </div>
+        </th:block>
+    </div>
+
+</div>
+</body>
+</html>

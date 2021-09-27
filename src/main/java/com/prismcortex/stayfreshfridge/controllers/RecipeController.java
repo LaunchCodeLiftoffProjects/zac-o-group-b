@@ -1,13 +1,21 @@
-package com.prismcortex.stayfreshfridge.controllers;
-import com.prismcortex.stayfreshfridge.data.RecipeRepository;
-import com.prismcortex.stayfreshfridge.models.Recipe;
+package org.launchcode.recipeapp.controllers;
+import org.launchcode.recipeapp.models.Recipe;
+import org.launchcode.recipeapp.models.RecipeIngredient;
+import org.launchcode.recipeapp.models.data.IngredientRepository;
+import org.launchcode.recipeapp.models.data.RecipeIngredientRepository;
+import org.launchcode.recipeapp.models.data.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -17,10 +25,33 @@ public class RecipeController {
     @Autowired
     private RecipeRepository recipeRepository;
 
+    @Autowired
+    private IngredientRepository ingredientRepository;
+
+    @Autowired
+    private RecipeIngredientRepository recipeIngredientRepository;
+
     @GetMapping("")
     public String recipe (Model model){
         model.addAttribute("title", "Recipe Application");
         model.addAttribute("recipes", recipeRepository.findAll());
+        model.addAttribute("ingredients", ingredientRepository.findAll());
+        return "recipe/index";
+    }
+
+    @GetMapping("/{ingredient_id}")
+    public String recipeSelected (Model model,@PathVariable int ingredient_id){
+        model.addAttribute("ingredients", ingredientRepository.findAll());
+        List <RecipeIngredient> lstRecipeIngredient = (List<RecipeIngredient>) recipeIngredientRepository.findByIngredientid(ingredient_id);
+        //String lstRecipeIngredientIds = "";
+        ArrayList<Integer> recipeIdList = new ArrayList<Integer>();
+        for (int i =0; i<lstRecipeIngredient.size();i++){
+            //lstRecipeIngredientIds += " ===> " + lstRecipeIngredient.get(i).getRecipeid().toString();
+            recipeIdList.add(lstRecipeIngredient.get(i).getRecipeid());
+        }
+        model.addAttribute("recipes",recipeRepository.findByRecipeIdIn(recipeIdList));
+        model.addAttribute("ingredientID",ingredient_id);
+        //model.addAttribute("title", String.valueOf(ingredient_id) + lstRecipeIngredientIds + recipeIdList.toString() + "===>>>>>>>");
         return "recipe/index";
     }
 
@@ -41,17 +72,41 @@ public class RecipeController {
     @GetMapping("add")
     public String displayAddRecipeForm (Model model){
         model.addAttribute(new Recipe());
+        model.addAttribute(new RecipeIngredient());
+        model.addAttribute("ingredients", ingredientRepository.findAll());
         return "recipe/add";
     }
 
     @PostMapping("add")
-    public String processAddEmployerForm(@ModelAttribute @Valid Recipe newRecipe,
-                                         Errors errors, Model model) {
+    public String processAddRecipeForm(@ModelAttribute @Valid Recipe newRecipe, RecipeIngredient newRecipeIngredient,
+                                         Errors errors, Model model,@RequestParam(required = true) int[] ingredientIds) {
 
         if (errors.hasErrors()) {
             return "recipe/add";
         }
         recipeRepository.save(newRecipe);
+        int iRecipeId = newRecipe.getRecipeId();
+        //newRecipeIngredient.setRecipeid(newRecipe.getRecipeId());
+        //recipeIngredientRepository.save(newRecipeIngredient);
+        for (int i=0; i<ingredientIds.length;i++){
+            RecipeIngredient ri = new RecipeIngredient();
+            ri.setRecipeid(iRecipeId);
+            ri.setIngredientid(ingredientIds[i]);
+            recipeIngredientRepository.save(ri);
+        }
+
+        return "redirect:";
+    }
+
+    @PostMapping("delete")
+    public String processDeleteRecipeForm(@RequestParam(required = true) int[] deleteRecipeId, Model model) {
+
+        for (int i=0; i<deleteRecipeId.length;i++){
+            recipeRepository.deleteById(deleteRecipeId[i]);
+            recipeIngredientRepository.deleteByRecipeid(deleteRecipeId[i]);
+        }
+        model.addAttribute("deleteMessage", "Selected Recipe Deleted !!!");
+
         return "redirect:";
     }
 

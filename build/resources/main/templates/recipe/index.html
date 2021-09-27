@@ -4,26 +4,57 @@
 <body>
 <h1 class="display-3 text-center">Stay Fresh Fridge</h1>
 <header th:replace="fragments :: header(page='recipe')"></header>
+
+<script type="text/javascript">
+        $(function () {
+            debugger;
+            $("#btnSubmit").click(function () {
+                var checked = $("#divRecipe input[type=checkbox]:checked").length;
+                var isChecked = checked > 0;
+                if (isChecked) {
+                    return true;
+                }
+                else {
+                    alert("Please select at-least one Recipe to delete");
+                    return false;
+                }
+            });
+        });
+    </script>
+
+
 <div th:replace="fragments :: alert"></div>
 <div class="container-fluid">
+    <form method="post" action="/recipe/delete">
     <br>
+    <p th:text="${title}"></p>
+
     <div>
         <a href="/recipe/add" class="btn btn-primary btn-lg active" role="button">Add New Recipe</a>
-        <a href="/recipe/addIngredients" class="btn btn-primary btn-lg active" role="button">Add New Ingredients</a>
+        <input type="submit" id="btnSubmit" value="Delete Recipe" class="btn btn-primary btn-lg active" />
+        <a href="/ingredients/add" class="btn btn-primary btn-lg active" role="button">Add New Ingredients</a>
+        Search by Ingredient: <select name="ingredientID" th:onchange="'window.location.href = \'' + @{/recipe/} + '\' + this.value ' ">
+            <th:block th:each="ingredient : ${ingredients}">
+                <option th:value=${ingredient.ingredient_id} th:text="${ingredient.ingredient_name}" th:selected="${ingredient.ingredient_id==ingredientID}"></option>
+            </th:block>
+        </select>
     </div>
     <br>
-    <div class="row">
+    <div class="row" id="divRecipe">
+        <span th:if="${recipes.size() == 0}"> No Recipe found</span>
+        <p th:text="${deleteMessage}"></p>
         <th:block th:each="recipe : ${recipes}">
             <div  class="col-md-4">
-                <a class="text-decoration-none" th:href="@{'/recipe/view/' + ${recipe.recipe_id}}">
+                <a class="text-decoration-none" th:href="@{'/recipe/view/' + ${recipe.recipeId}}">
                     <h5  th:text="${recipe.recipe_name}"></h5>
                     <img th:src="${recipe.recipe_img_url}">
                 </a>
+                <input name="deleteRecipeId" type="checkbox" th:value="${recipe.recipeId}" />
                 <p>&nbsp;</p>
             </div>
         </th:block>
     </div>
-
+    </form>
 </div>
 </body>
 </html>
