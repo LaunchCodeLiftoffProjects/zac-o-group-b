@@ -25,10 +25,10 @@ class Grocery_List_Class {
     const selectedGroceryIndex = 
     groceryObjectList.findIndex((item)=> item.id == x);
     //cannot read properties of undefined 
-    console.log(groceryObjectList[selectedGroceryIndex].isDone); //continuously returning false
+    console.log(groceryObjectList[selectedGroceryIndex].isDone); 
     groceryObjectList[selectedGroceryIndex].isDone == false ? groceryObjectList[
       selectedGroceryIndex].isDone == true : groceryObjectList[selectedGroceryIndex].isDone = false;
-      this.display();
+      this.display(); //should switch false to true vice versa 
   }
 
   deleteElement(z) {
