@@ -22,13 +22,12 @@ class Grocery_List_Class {
   }
 //isDone is returning undefined 
   done_undone(x) {
-    const selectedGroceryIndex = 
-    groceryObjectList.findIndex((item)=> item.id == x);
+    const selectedGroceryIndex = groceryObjectList.findIndex((item)=> item.id == x);
     //cannot read properties of undefined 
     console.log(groceryObjectList[selectedGroceryIndex].isDone); 
     groceryObjectList[selectedGroceryIndex].isDone == false ? groceryObjectList[
-      selectedGroceryIndex].isDone == true : groceryObjectList[selectedGroceryIndex].isDone = false;
-      this.display(); //should switch false to true vice versa 
+      selectedGroceryIndex].isDone = true : groceryObjectList[selectedGroceryIndex].isDone = false;
+      this.display(); //switch false to true vice versa and call checked class in css later in display()
   }
 
   deleteElement(z) {
