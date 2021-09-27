@@ -1,7 +1,7 @@
 input {
   width: 75%;
   /*margin-right: 0;*/
-  padding: 10px;
+  padding: 12px 8px 12px 40px;
   /*border: none;*/
   /*font-size: 14px;*/
 }
@@ -24,6 +24,7 @@ ul li{
   position: relative; 
   padding: 12px 8px 12px 40px;
   background: #c8eea0;
+  list-style-type: none;
 
   /*prevents selection of items*/
   -webkit-user-select: none;
@@ -37,17 +38,21 @@ ul li:nth-child(odd) {
 }
 
 ul li:hover {
-  content: "\f14a";
+  /* content: "\f14a"; */
     background: #ddd;
 }
 
-ul.li::before{
+ul li::before {
+  font-family: "Font Awesome 5 Free";
   content: "\f0c8";
+  position: absolute;
   color:rgb(0, 0, 0);
   left: 0;
   top: 0;
   padding: 12px 16px 12px 16px;
 }
+
+
 
 
 /*creates checkmark and strikethrough, called on click in js*/
@@ -59,34 +64,20 @@ ul li.checked {
 }
 
 ul li.checked::before {
+  font-family: "Font Awesome 5 Free";
   content: "\f14a";
   position: absolute;
   color:rgb(0, 0, 0);
   left: 0;
   top: 0;
   padding: 12px 16px 12px 16px;
-
-
-  /* content: "";
-  position: absolute;
-  border-color: #fff;
-  border-style: solid;
-  border-width: 0 2px 2px 0;
-  top: 10px;
-  left: 16px;
-  transform: rotate(45deg);
-  height: 15px;
-  width: 7px;  */
 }
 
-ul li.checked:hover{
+ ul li.checked:hover{
+  font-family: "Font Awesome 5 Free";
   content: "\f14a";
-  position: absolute;
   color:rgb(116, 116, 116);
-  left: 0;
-  top: 0;
-  padding: 12px 16px 12px 16px;
-}
+}  
 
 
 /* .fa-square {
@@ -97,7 +88,15 @@ ul li.checked:hover{
 }
 
 .fa-square:hover{
-  background: ".fa-check-square";
+  color:rgb(163, 97, 97)
+}  */
+
+/* .fa-check-square {
+  position: absolute;
+  color: rgba(0,0,0,0);
+  left: 0;
+  top: 0;
+  padding: 12px 16px 12px 16px;
 } */
 
 /*styles trashcan icon*/

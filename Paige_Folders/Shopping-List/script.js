@@ -44,8 +44,8 @@ class Grocery_List_Class {
     groceryObjectList.forEach((object_item) => {
       const liElement = document.createElement("li");
       const delBtn = document.createElement("i"); 
-      const emptyCheck = document.createElement("eC")
-      const activeCheck = document.createElement("a")
+      //const emptyCheck = document.createElement("i")
+      //const activeCheck = document.createElement("i")
 
       liElement.innerText = object_item.groceryText;
       liElement.setAttribute("data-id", object_item.id);
@@ -53,15 +53,15 @@ class Grocery_List_Class {
       delBtn.setAttribute("data-id", object_item.id);
       delBtn.classList.add("far", "fa-trash-alt");
 
-      emptyCheck.setAttribute("data-id", object_item.id);
-      emptyCheck.classList.add("far", "fa-square");
+      //emptyCheck.setAttribute("data-id", object_item.id);
+      //emptyCheck.classList.add("far", "fa-square");
 
-      activeCheck.setAttribute("date-id", object_item.id);
-      activeCheck.classList.add("far", "fa-check-square");
+      //activeCheck.setAttribute("date-id", object_item.id);
+      //activeCheck.classList.add("far", "fa-check-square");
 
       liElement.appendChild(delBtn);
-      liElement.appendChild(emptyCheck);
-      liElement.appendChild(activeCheck);
+      //liElement.appendChild(emptyCheck);
+      //liElement.appendChild(activeCheck);
 
       delBtn.addEventListener("click", function(e) {
         const deleteId = e.target.getAttribute("data-id");
@@ -70,12 +70,12 @@ class Grocery_List_Class {
       })
 
 
-      //done_undone is not being called correctly 
+      
       liElement.addEventListener("click", function(e) {
         const selectedId = e.target.getAttribute("data-id");
         groceryList.done_undone(selectedId);
       })
-      //isDone is undefined 
+      
       if (object_item.isDone) {
         liElement.classList.add("checked");
       }

@@ -12,9 +12,10 @@ call strikethrough properly
 
 other errors:
 
-returning
->"script.js:27 Uncaught TypeError: Cannot read properties of undefined (reading 'isDone')
-at Grocery_List_Class.done_undone (script.js:27)
-at HTMLLIElement.< anonymous> (script.js:62)"
+~~returning~~
+>~~"script.js:27 Uncaught TypeError: Cannot read properties of undefined (reading 'isDone')~~
+~~at Grocery_List_Class.done_undone (script.js:27)~~
+~~at HTMLLIElement.< anonymous> (script.js:62)"~~
 
-when deleting objects from list on chrome
+~~when deleting objects from list on chrome~~
+note: returning error because the property has been deleted, therefore cannot read a property that no longer exists. Not a true error.
