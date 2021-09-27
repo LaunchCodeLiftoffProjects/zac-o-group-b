@@ -12,7 +12,7 @@ class Grocery_List_Class {
       const groceryObject = {
         id: groceryObjectList.length,
         groceryText: groceryInput,
-        isDone: false,
+        isDone: false, //sets default as false therefore not triggering checked 
       }
 
       groceryObjectList.unshift(groceryObject);
@@ -24,7 +24,8 @@ class Grocery_List_Class {
   done_undone(x) {
     const selectedGroceryIndex = 
     groceryObjectList.findIndex((item)=> item.id == x);
-    console.log(groceryObjectList[selectedGroceryIndex].isDone);
+    //cannot read properties of undefined 
+    console.log(groceryObjectList[selectedGroceryIndex].isDone); //continuously returning false
     groceryObjectList[selectedGroceryIndex].isDone == false ? groceryObjectList[
       selectedGroceryIndex].isDone == true : groceryObjectList[selectedGroceryIndex].isDone = false;
       this.display();
@@ -44,7 +45,7 @@ class Grocery_List_Class {
     groceryObjectList.forEach((object_item) => {
       const liElement = document.createElement("li");
       const delBtn = document.createElement("i"); 
-      const emptyCheck = document.createElement("e")
+      const emptyCheck = document.createElement("eC")
       const activeCheck = document.createElement("a")
 
       liElement.innerText = object_item.groceryText;
@@ -69,11 +70,13 @@ class Grocery_List_Class {
         
       })
 
+
+      //done_undone is not being called correctly 
       liElement.addEventListener("click", function(e) {
         const selectedId = e.target.getAttribute("data-id");
         groceryList.done_undone(selectedId);
       })
-
+      //isDone is undefined 
       if (object_item.isDone) {
         liElement.classList.add("checked");
       }
