@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+
+<header th:replace="fragments :: header(page='shopping')"></header>
+<!--<div th:replace="fragments :: alert"></div>-->
+<div class="container-fluid">
+
+
+
+    <form action="shoppinglist" method="post" style="max-width:800px;">
+        <div class="container-fluid list-group list-group-horizontal" >
+            <h5 class="list-group-item list-group-item-primary">Add Item To Shopping List</h5>
+            <a th:href="@{'/shoppinglist/move'}"><h5 class="list-group-item list-group-item-primary">Move Items to Fridge</h5></a>
+            <a th:href="@{'/shoppinglist/delete'}"><h5 class="list-group-item list-group-item-primary">Delete Items</h5></a>
+        </div>
+
+        <div class="form-group input-group">
+            <label th:for="name" class="text-dark"></label>
+            <input class="form-control" th:field="${groceryItem.name}" placeholder="Item Name"/>
+            <span th:errors="${groceryItem.name}" class="error text-danger"></span>
+        </div>
+
+<!--        <div class="form-group">-->
+<!--            <label th:for="expires" class="text-dark">Expires: </label>-->
+<!--            <input type="date" class="form-control" th:field="${groceryItem.expires}">-->
+
+<!--        </div>-->
+
+        <br>
+        <input type="submit" value="Save" class="btn btn-primary btn-lg active" />
+    </form>
+    <div class="list-group list-group-flush fs-3 fw-bold" id="shoppinglist">
+        <ul>
+            <th:block th:each="groceryItem : ${groceryItems}">
+
+                <li class="list-group-item">
+                    <input class="form-check-input me-2" type="checkbox" th:value="${groceryItem.id}">
+                    <th:block th:text="${groceryItem.name}">
+                    </th:block>
+                </li>
+
+            </th:block>
+        </ul>
+    </div>
+
+</div>
+</body>
+</html>

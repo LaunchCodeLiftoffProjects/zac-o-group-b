@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+
+<header th:replace="fragments :: header(page='recipe')"></header>
+<!--<div th:replace="fragments :: alert"></div>-->
+<div class="container-fluid">
+    <div class="row" th:each="recipe : ${recipes}">
+        <h2 th:text="${recipe.recipe_name}"></h2>
+        <hr>
+        <h5 th:text = "${recipe.recipe_description}"></h5>
+        <p>&nbsp;</p>
+        <div class="col-md-4">
+            <img th:src="${recipe.recipe_img_url}">
+        </div>
+
+        <div  class="col-md-8">
+            <h5>INGREDIENTS</h5>
+            <p th:utext="${recipe.recipe_details}"></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
