@@ -69,10 +69,15 @@ public class ShoppingListController {
     }
 
     @PostMapping("move")
-    public String moveToFridge(@ModelAttribute @Valid FridgeItem newFridgeItem,
+    public String moveToFridge(@ModelAttribute @Valid FridgeItem newFridgeItem, Errors errors,
                                @RequestParam(required = false) int itemId) {
 
+        if (errors.hasErrors()) {
+            return "redirect:move";
+        }
+
         fridgeRepository.save(newFridgeItem);
+
         groceryItemRepository.deleteById(itemId);
 
 //        Optional optMoveItem = groceryItemRepository.findById(item);

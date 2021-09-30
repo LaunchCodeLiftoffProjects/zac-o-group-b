@@ -21,8 +21,10 @@
             <label th:for="expires" class="text-dark"></label>
             <input type="date" class="form-control" th:field="${fridgeItem.expires}">
             <input type="submit" value="Add to Fridge" class="btn btn-primary btn-lg active"/>
+
         </div>
         <p th:errors="${fridgeItem.name}" class="error text-danger"></p>
+        <p th:errors="${fridgeItem.expires}" class="error text-danger"></p>
         <br>
 
     </form>

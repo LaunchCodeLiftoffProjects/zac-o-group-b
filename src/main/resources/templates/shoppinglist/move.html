@@ -10,18 +10,24 @@
     <a th:href="@{'/shoppinglist'}"><h5 class="list-group-item list-group-item-primary">Add Items</h5></a>
     <a th:href="@{'/shoppinglist/delete'}"><h5 class="list-group-item list-group-item-primary">Delete Items</h5></a>
 </div>
+<p th:errors="${fridgeItem.name}" class="error text-danger"></p>
+<p th:errors="${fridgeItem.expires}" class="error text-danger"></p>
 <form method="post" action="move" style="max-width:800px">
     <div class="container-fluid">
+
         <ul class="list-group">
             <th:block th:each="item : ${shoppingList}">
                 <li class="list-group-item">
                     <div class="input-group">
                         <th:block th:field="${fridgeItem.name}">
                         <input type="text" th:name="name" th:value="${item.name}" class="form-control pt-2 mx-2">
+
                         </th:block>
                     <label th:for="expires" class="text-dark"></label>
                     <input type="date" class="form-control" name="expires" th:field="${fridgeItem.expires}">
+
                     <button type="submit" class="btn btn-primary" name="itemId" th:value="${item.id}">Set Use By Date</button>
+
                     </div>
                 </li>
             </th:block>

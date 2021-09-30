@@ -1,12 +1,15 @@
 package com.savegreen.models;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class FridgeItem extends AbstractEntity{
 
+    @NotBlank(message= "Name is required")
     private String name;
 
+    @NotBlank(message= "Use By Date required")
     private String expires;
 
     public FridgeItem() {}

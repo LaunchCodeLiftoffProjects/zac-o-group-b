@@ -19,9 +19,9 @@
         <div class="form-group input-group">
             <label th:for="name" class="text-dark"></label>
             <input class="form-control" th:field="${groceryItem.name}" placeholder="Item Name"/>
-            <span th:errors="${groceryItem.name}" class="error text-danger"></span>
-        </div>
 
+        </div>
+        <span th:errors="${groceryItem.name}" class="error text-danger"></span>
 <!--        <div class="form-group">-->
 <!--            <label th:for="expires" class="text-dark">Expires: </label>-->
 <!--            <input type="date" class="form-control" th:field="${groceryItem.expires}">-->
