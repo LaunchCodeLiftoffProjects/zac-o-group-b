@@ -8,11 +8,11 @@ public class HomeController {
     @RequestMapping("")
     public String index (Model model){
         model.addAttribute("title", "Save Green");
-        return "shoppinglist/index";
+        return "index";
     }
     @RequestMapping("home")
     public String home (Model model){
         model.addAttribute("title", "Save Green");
-        return "shoppinglist/index";
+        return "index";
     }
 }

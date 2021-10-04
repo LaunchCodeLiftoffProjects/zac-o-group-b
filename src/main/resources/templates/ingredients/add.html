@@ -2,23 +2,24 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body>
-<h1 class="display-3 text-center">Stay Fresh Fridge</h1>
+<!--<h1 class="display-3 text-center">Stay Fresh Fridge</h1>-->
 <header th:replace="fragments :: header(page='recipe')"></header>
 <!--<div th:replace="fragments :: alert"></div>-->
 <div class="container-fluid">
 
     <form method="post" style="max-width:600px;">
         <div>
-            <h5 class="text-primary">Add New Ingredient</h5>
+            <h2>Add New Ingredient</h2>
         </div>
         <div class="form-group">
-            <label th:for="name" class="text-dark">Ingredient Name</label>
+            <label for="inputIngredientName">Ingredient Name</label>
             <input class="form-control" th:field="${ingredient.ingredient_name}" placeholder="Ingredient Name" required="true" autofocus="true"/>
             <span th:errors="${ingredient.ingredient_name}" class="error text-danger"></span>
         </div>
 
         <br>
-        <input type="submit" value="Save" class="btn btn-primary btn-lg active" />
+        <input type="submit" value="Save" class="btn btn-success active" />
+        <input type="reset" value="Cancel" class="btn btn-danger">
     </form>
 
 

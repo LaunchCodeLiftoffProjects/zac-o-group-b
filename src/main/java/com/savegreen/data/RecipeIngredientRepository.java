@@ -13,4 +13,5 @@ import java.util.List;
 public interface RecipeIngredientRepository extends CrudRepository<RecipeIngredient, Integer> {
     List<RecipeIngredient> findByIngredientid(int ingredient_id);
     long deleteByRecipeid(int recipeid);
+    long deleteByIngredientid(int ingredient_id);
 }

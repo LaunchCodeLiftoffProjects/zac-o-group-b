@@ -2,25 +2,46 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body>
-<h1 class="display-3 text-center">Save Green</h1>
+<!--<h1 class="display-3 text-center">Stay Fresh Fridge</h1>-->
 <header th:replace="fragments :: header(page='recipe')"></header>
 <!--<div th:replace="fragments :: alert"></div>-->
+<script type="text/javascript">
+        $(function () {
+            debugger;
+            $("#btnSubmit").click(function () {
+                var checked = $("#divIngredient input[type=checkbox]:checked").length;
+                var isChecked = checked > 0;
+                if (isChecked) {
+                    return true;
+                }
+                else {
+                    alert("Please select at-least one Ingredient to delete");
+                    return false;
+                }
+            });
+        });
+    </script>
 <div class="container-fluid">
-    <br>
-    <div>
-        <a href="/recipe/add" class="btn btn-primary btn-lg active" role="button">Add New Recipe</a>
-        <a href="/ingredients/add" class="btn btn-primary btn-lg active" role="button">Add New Ingredients</a>
-    </div>
-    <br>
-    <div class="row">
-        <th:block th:each="ingredient : ${ingredients}">
-            <div  class="col-md-4">
-                <h5  th:text="${ingredient.ingredient_id}"></h5> - <h5  th:text="${ingredient.ingredient_name}"></h5>
-                <p>&nbsp;</p>
-            </div>
-        </th:block>
-    </div>
-
+    <form method="post" action="/ingredients/delete">
+        <br>
+        <div>
+            <a href="/recipe/add" class="btn btn-primary" role="button">Add New Recipe</a>
+            <a href="/ingredients/add" class="btn btn-primary" role="button">Add New Ingredients</a>
+            <input type="submit" id="btnSubmit" value="Delete Ingredient" class="btn btn-primary" />
+        </div>
+        <br>
+        <div class="row" id="divIngredient">
+            <h2>Ingredient List</h2>
+            <p>&nbsp;</p>
+            <th:block th:each="ingredient : ${ingredients}">
+                <div  class="col-md-4">
+                    <input name="deleteIngredientId" type="checkbox" th:value="${ingredient.ingredient_id}" />
+                    <b> <span th:text="${ingredient.ingredient_name}"></span> </b>
+                    <p>&nbsp;</p>
+                </div>
+            </th:block>
+        </div>
+    </form>
 </div>
 </body>
 </html>

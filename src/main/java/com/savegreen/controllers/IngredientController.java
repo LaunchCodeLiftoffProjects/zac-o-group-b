@@ -1,5 +1,6 @@
 package com.savegreen.controllers;
 import com.savegreen.data.IngredientRepository;
+import com.savegreen.data.RecipeIngredientRepository;
 import com.savegreen.models.Ingredient;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class IngredientController {
 
     @Autowired
     private IngredientRepository ingredientRepository;
+
+    @Autowired
+    private RecipeIngredientRepository recipeIngredientRepository;
 
     @GetMapping("")
     public String displayIngredientForm(Model model){
@@ -38,6 +42,18 @@ public class IngredientController {
             return "ingredients/add";
         }
         ingredientRepository.save(newIngredient);
+        return "redirect:";
+    }
+
+    @PostMapping("delete")
+    public String processDeleteIngredientForm(@RequestParam(required = true) int[] deleteIngredientId, Model model) {
+
+        for (int i=0; i<deleteIngredientId.length;i++){
+            ingredientRepository.deleteById(deleteIngredientId[i]);
+            recipeIngredientRepository.deleteByIngredientid(deleteIngredientId[i]);
+        }
+        model.addAttribute("deleteMessage", "Selected Ingredient Deleted !!!");
+
         return "redirect:";
     }
 }
