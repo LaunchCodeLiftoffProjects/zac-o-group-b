@@ -12,6 +12,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @RequestMapping("shoppinglist")
 @Controller
@@ -30,6 +31,7 @@ public class ShoppingListController {
         model.addAttribute(new GroceryItem());
         return "shoppinglist/index";
     }
+
     @PostMapping
     public String createGroceryItem(@ModelAttribute @Valid GroceryItem newGroceryItem, Errors errors,
                                     Model model) {
@@ -50,8 +52,8 @@ public class ShoppingListController {
 
     @PostMapping("delete")
     public String deleteItems(@RequestParam(required = false) int[] itemIds) {
-        if(itemIds != null) {
-            for(int id : itemIds) {
+        if (itemIds != null) {
+            for (int id : itemIds) {
                 groceryItemRepository.deleteById(id);
             }
         }
@@ -64,32 +66,29 @@ public class ShoppingListController {
     public String displayMoveToFridge(Model model) {
         model.addAttribute("title", "Move To Fridge");
         model.addAttribute("shoppingList", groceryItemRepository.findAll());
-        model.addAttribute(new FridgeItem());
+
         return "shoppinglist/move";
     }
 
     @PostMapping("move")
-    public String moveToFridge(@ModelAttribute @Valid FridgeItem newFridgeItem, Errors errors,
+    public String moveToFridge(@RequestParam String expires, @RequestParam String name, Model model,
                                @RequestParam(required = false) int itemId) {
 
-        if (errors.hasErrors()) {
-            return "redirect:move";
+        expires = expires.replaceAll(",$", "");
+        if (expires.isEmpty()) {
+            model.addAttribute("errorMsg", "All fields required");
+            model.addAttribute("title", "Move To Fridge");
+            model.addAttribute("shoppingList", groceryItemRepository.findAll());
+            return "shoppinglist/move";
+        } else {
+            Optional moveItem = groceryItemRepository.findById(itemId);
+            if(moveItem.isPresent()) {
+                GroceryItem newMoveItem = (GroceryItem) moveItem.get();
+                FridgeItem fridgeItem = new FridgeItem(newMoveItem.getName(), expires);
+                fridgeRepository.save(fridgeItem);
+                groceryItemRepository.deleteById(itemId);
+            }
         }
-
-        fridgeRepository.save(newFridgeItem);
-
-        groceryItemRepository.deleteById(itemId);
-
-//        Optional optMoveItem = groceryItemRepository.findById(item);
-//        if (optMoveItem.isPresent()) {
-//            GroceryItem fridgeItem = (GroceryItem) optMoveItem.get();
-//            FridgeItem newFridgeItem = new FridgeItem(moveItem.getName(), expires);
-//            fridgeRepository.save(newFridgeItem);
-//            groceryItemRepository.deleteById(item);
-//        }
         return "redirect:move";
     }
-
-
-
 }

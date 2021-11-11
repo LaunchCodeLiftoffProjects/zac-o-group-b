@@ -10,8 +10,7 @@
     <a th:href="@{'/shoppinglist'}"><h5 class="list-group-item list-group-item-primary">Add Items</h5></a>
     <a th:href="@{'/shoppinglist/delete'}"><h5 class="list-group-item list-group-item-primary">Delete Items</h5></a>
 </div>
-<p th:errors="${fridgeItem.name}" class="error text-danger"></p>
-<p th:errors="${fridgeItem.expires}" class="error text-danger"></p>
+
 <form method="post" action="move" style="max-width:800px">
     <div class="container-fluid">
 
@@ -19,12 +18,12 @@
             <th:block th:each="item : ${shoppingList}">
                 <li class="list-group-item">
                     <div class="input-group">
-                        <th:block th:field="${fridgeItem.name}">
-                        <input type="text" th:name="name" th:value="${item.name}" class="form-control pt-2 mx-2">
 
-                        </th:block>
+                        <input type="text" name="name" th:value="${item.name}" class="form-control pt-2 mx-2">
+
+
                     <label th:for="expires" class="text-dark"></label>
-                    <input type="date" class="form-control" name="expires" th:field="${fridgeItem.expires}">
+                    <input type="date" class="form-control" name="expires">
 
                     <button type="submit" class="btn btn-primary" name="itemId" th:value="${item.id}">Set Use By Date</button>
 
@@ -34,6 +33,7 @@
         </ul>
     </div>
 </form>
+<p th:text="${errorMsg}" style="color: red; text-align: center"></p>
 <!--<div class="d-grid gap-2 col-6 mx-auto" th:unless="${shoppingList.size()}">-->
 <!--    <a href="/shoppinglist" class="btn btn-info">Back To List</a>-->
 <!--</div>-->

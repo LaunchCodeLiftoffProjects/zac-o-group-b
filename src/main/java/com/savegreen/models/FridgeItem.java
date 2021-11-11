@@ -9,7 +9,7 @@ public class FridgeItem extends AbstractEntity{
     @NotBlank(message= "Name is required")
     private String name;
 
-    @NotBlank(message= "Use By Date required")
+
     private String expires;
 
     public FridgeItem() {}
